@@ -2,4 +2,4 @@ Welcome to my personal webpage. Here, I'll share a little about me and what I've
 
 ---
 
-_<span style="font-size:4em;">Website created from the "Prologue" template available at html5up.net.</span>_
+_<span style="font-size:4em;">Website adapted from the "Prologue" template available at html5up.net.</span>_
