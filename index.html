@@ -11,6 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
   </head>
   <body>
     <div class="bookcase">
@@ -19,40 +23,88 @@
           <div id="modalMasters" class="modal">
             <div class="modal-content">
               <span class="close">&times;</span>
-              <h2>Master of Science in Computational Linguistics</h2>
-              <p>
-                <strong>Montclair State University: Montclair, NJ</strong> | GPA
-                3.96
-              </p>
-              <p>Expected graduation: May 2022</p>
-              <h3>Research Projects:</h3>
-              <ul>
-                <li>
-                  Cross-lingual definition modeling without bilingual corpora
-                </li>
-                <li>Farsi NLP Tools</li>
-              </ul>
+              <div class="modal-image">
+                <img
+                  class="university-logo"
+                  src="assets/images/hawk-logo-color-2.svg"
+                  alt="Montclair Logo"
+                />
+              </div>
+              <div class="modal-info">
+                <h2>
+                  <i class="fa fa-graduation-cap"></i> Master of Science in
+                  Computational Linguistics
+                </h2>
+                <p>
+                  <strong
+                    ><i class="fas fa-university"></i> Montclair State
+                    University: Montclair, NJ</strong
+                  >
+                </p>
+                <div class="highlight-box">
+                  <!-- Container to highlight details -->
+                  <p>
+                    <span class="gpa-label">GPA:</span
+                    ><span class="gpa-value">3.96</span>
+                  </p>
+                  <p class="graduation-date">
+                    <i class="fas fa-calendar-alt"></i> Graduated May 2022
+                  </p>
+                </div>
+
+                <h3>
+                  <i class="fas fa-project-diagram"></i> Research Projects:
+                </h3>
+                <ul>
+                  <!-- prettier-ignore -->
+                  <li>Cross-lingual definition modeling without bilingual corpora</li>
+                  <li>Farsi NLP Tools</li>
+                </ul>
+              </div>
             </div>
           </div>
 
           <div id="modalBachelors" class="modal">
             <div class="modal-content">
               <span class="close">&times;</span>
-              <h2>
-                Bachelor of Science in German, Chemical Engineering, Engineering
-                Honors
-              </h2>
-              <p>
-                <strong>University of Wyoming: Laramie, WY</strong> | GPA 3.68
-              </p>
-              <p>Graduated May 2018</p>
-              <h3>Research Projects:</h3>
-              <ul>
-                <li>
-                  Carbon capture and storage (CCS) innovative cost recovery
-                </li>
-                <li>Anti-cancer drug delivery methods</li>
-              </ul>
+              <div class="modal-image">
+                <img
+                  class="university-logo"
+                  src="assets/images/Wyoming_Athletics_logo.svg"
+                  alt="Wyoming Logo"
+                />
+              </div>
+              <div class="modal-info">
+                <h2>
+                  <i class="fa fa-graduation-cap"></i> Bachelor of Science in
+                  German, Chemical Engineering, Engineering Honors
+                </h2>
+                <p>
+                  <strong
+                    ><i class="fas fa-university"></i> University of Wyoming:
+                    Laramie, WY</strong
+                  >
+                </p>
+                <div class="highlight-box">
+                  <!-- Container to highlight details -->
+                  <p>
+                    <span class="gpa-label">GPA:</span
+                    ><span class="gpa-value">3.68</span>
+                  </p>
+                  <p class="graduation-date">
+                    <i class="fas fa-calendar-alt"></i> Graduated May 2018
+                  </p>
+                </div>
+
+                <h3>
+                  <i class="fas fa-project-diagram"></i> Research Projects:
+                </h3>
+                <ul>
+                  <!-- prettier-ignore -->
+                  <li>Carbon capture and storage (CCS) innovative cost recovery</li>
+                  <li>Anti-cancer drug delivery methods</li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -87,26 +139,26 @@
               modalBachelors.getElementsByClassName("close")[0];
 
             btnMasters.onclick = function () {
-              modalMasters.style.display = "block";
+              modalMasters.classList.add("modal-active");
             };
             btnBachelors.onclick = function () {
-              modalBachelors.style.display = "block";
+              modalBachelors.classList.add("modal-active");
             };
 
             // When the user clicks on <span> (x), close the modal
             spanCloseMasters.onclick = function () {
-              modalMasters.style.display = "none";
+              modalMasters.classList.remove("modal-active");
             };
             spanCloseBachelors.onclick = function () {
-              modalBachelors.style.display = "none";
+              modalBachelors.classList.remove("modal-active");
             };
 
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
               if (event.target == modalMasters) {
-                modalMasters.style.display = "none";
+                modalMasters.classList.remove("modal-active");
               } else if (event.target == modalBachelors) {
-                modalBachelors.style.display = "none";
+                modalBachelors.classList.remove("modal-active");
               }
             };
           </script>
