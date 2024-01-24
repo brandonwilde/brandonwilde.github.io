@@ -7,7 +7,7 @@ html {
   height: 100%;
   margin: 0;
   background: #f7f3e9;
-  font-family: "Times New Roman", Times, serif; /* Traditional book serif font */
+  font-family: "Times New Roman", Times, serif;
 }
 .bookcase {
   display: flex;
@@ -22,7 +22,6 @@ html {
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  /* padding: var(--shelf-thickness); */
   border-radius: 0 0 10px 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   height: 400px;
@@ -109,28 +108,24 @@ html {
 }
 
 .right-face {
-  /* This will become the right side of the box */
   transform-origin: left;
   right: 100%;
   background-color: #8c453f;
 }
 
 .left-face {
-  /* This will become the left side of the box */
   transform-origin: right;
   left: 100%;
   background-color: #8c453f;
 }
 
 .top-face {
-  /* This will become the top side of the box */
   transform-origin: bottom;
   bottom: 100%;
   background-color: darkgray;
 }
 
 .bottom-face {
-  /* This will become the bottom side of the box */
   transform-origin: top;
   top: 100%;
   background-color: darkgray;
@@ -139,14 +134,14 @@ html {
 .modal {
   visibility: hidden;
   opacity: 0;
-  position: fixed; /* Stay in place */
+  position: fixed;
   z-index: 1100;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.25); /* Black with opacity */
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.25);
   padding-top: 60px;
   transition: visibility 0s linear 0.3s, opacity 0.3s; /* Fade in background */
 }
