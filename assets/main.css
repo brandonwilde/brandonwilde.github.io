@@ -1,3 +1,7 @@
+:root {
+  --shelf-thickness: 25px;
+}
+
 body,
 html {
   height: 100%;
@@ -13,11 +17,12 @@ html {
   background-position: center;
   height: 100%;
 }
+
 .shelf {
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  padding: 20px;
+  /* padding: var(--shelf-thickness); */
   border-radius: 0 0 10px 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   height: 400px;
@@ -32,7 +37,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 20px;
+  height: var(--shelf-thickness);
   background: url("textures/wood2-h-cropped.png");
   background-size: contain;
   box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.3);
@@ -40,8 +45,47 @@ html {
 }
 
 .shelf-section {
-  display: flex;
   min-width: 200px;
+  position: relative;
+}
+
+.board-section {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: var(--shelf-thickness);
+}
+
+.shelf-label {
+  padding-left: 15px;
+  padding-right: 15px;
+  background: linear-gradient(to bottom, #b5a66b, #dbc688);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  position: relative;
+  white-space: nowrap;
+  color: rgb(122, 92, 18);
+}
+
+/* light glare */
+.shelf-label::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  background: radial-gradient(ellipse closest-side at center, rgba(255, 255, 255, 0.75), transparent);
+}
+
+.content-section {
+  margin-bottom: var(--shelf-thickness);
+  display: flex;
+  justify-content: center;
 }
 
 .book {
