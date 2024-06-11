@@ -1,16 +1,33 @@
+const colors = {
+  red: [98, 55, 55],
+  lightRed: [162, 80, 74],
+  green: [77, 98, 89],
+  blue: [74, 104, 162],
+  yellow: [162, 128, 27],
+  yellowGreen: [106, 99, 69],
+  purple: [92, 77, 132],
+  gray: [115, 115, 115],
+};
+
 function attachModal(button, modal) {
   button.onclick = function () {
     modal.classList.add("modal-active");
   };
 }
 
-function createBook(id, { width = 40, height = 200, content = "" } = {}) {
+function createBook(
+  id,
+  { content = "", width = 40, height = 200, color = colors.red } = {}
+) {
   // Create the book div
   const book = document.createElement("div");
   book.id = id;
   book.className = "book";
   book.style.width = `${width}px`;
   book.style.height = `${height}px`;
+  book.style.backgroundColor = `rgb(${color.join(",")})`;
+  dimColor = color.map((val) => val * 0.86);
+  dimColorRgb = `rgb(${dimColor.join(",")})`;
 
   // Create the content span
   const span = document.createElement("span");
@@ -31,6 +48,11 @@ function createBook(id, { width = 40, height = 200, content = "" } = {}) {
   for (const face of faces) {
     const div = document.createElement("div");
     div.className = `book-face book-${face}-face`;
+    if (face === "right" || face === "left") {
+      div.style.backgroundColor = dimColorRgb;
+    } else {
+      div.style.backgroundColor = `rgb(169, 169, 169)`;
+    }
     book.appendChild(div);
   }
 
@@ -73,6 +95,7 @@ function createEducationModal(
 const bookBachelors = createBook("bookBachelors", {
   width: 125,
   height: 265,
+  color: colors.gray,
   content: "B.S. Chemical Engineering & German",
 });
 
@@ -94,6 +117,7 @@ attachModal(bookBachelors, modalBachelors);
 const bookMasters = createBook("bookMasters", {
   width: 110,
   height: 265,
+  color: colors.yellowGreen,
   content: "M.S. Computational Linguistics",
 });
 
@@ -114,24 +138,28 @@ attachModal(bookMasters, modalMasters);
 
 const bookAei = createBook("bookAei", {
   width: 70,
+  color: colors.gray,
   content: "AEI",
 });
 
 const bookMsu1 = createBook("bookMsu1", {
   width: 50,
   height: 200,
+  color: colors.yellowGreen,
   content: "MSU",
 });
 
 const bookMsu2 = createBook("bookMsu2", {
   width: 40,
   height: 220,
+  color: colors.red,
   content: "MSU",
 });
 
 const bookInventives = createBook("bookInventives", {
   width: 80,
   height: 250,
+  color: colors.yellowGreen,
   content: "Inventives",
 });
 // const modalInventives = createEducationModal();
@@ -140,6 +168,7 @@ const bookInventives = createBook("bookInventives", {
 const bookSyera = createBook("bookSyera", {
   width: 60,
   height: 180,
+  color: colors.red,
   content: "Syera",
 });
 // const modalSyera = createEducationModal();
@@ -160,8 +189,12 @@ const shelfB = document.getElementById("shelfB");
 const shelfBSections = shelfB.querySelectorAll(".shelf-section");
 const shelfBSection3 = shelfBSections[3].querySelector(".content-section");
 
-shelfBSection3.appendChild(createBook("book1", { height: 240 }));
-shelfBSection3.appendChild(createBook("book2"));
+shelfBSection3.appendChild(
+  createBook("book1", { height: 240, color: colors.gray })
+);
+shelfBSection3.appendChild(
+  createBook("book2", { color: colors.yellowGreen, content: "Δ" })
+);
 
 // Shelf C
 const shelfC = document.getElementById("shelfC");
@@ -169,7 +202,9 @@ const shelfCSections = shelfC.querySelectorAll(".shelf-section");
 const shelfCSection1 = shelfCSections[1].querySelector(".content-section");
 const shelfCSection2 = shelfCSections[2].querySelector(".content-section");
 
-shelfCSection1.appendChild(createBook("book3", { width: 27, content: "ϕ" }));
+shelfCSection1.appendChild(
+  createBook("book3", { width: 27, color: colors.blue, content: "ϕ" })
+);
 
 shelfCSection2.appendChild(bookAei);
 shelfCSection2.appendChild(bookMsu1);
