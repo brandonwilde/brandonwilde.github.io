@@ -21,50 +21,16 @@
       <div id="shelfA" class="shelf">
         <div class="shelf-section">
           <div class="content-section">
-            <div id="modalMasters" class="modal">
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <div class="modal-image">
-                  <img
-                    class="university-logo"
-                    src="assets/images/hawk-logo-color-2.svg"
-                    alt="Montclair Logo"
-                  />
-                </div>
-                <div class="modal-info">
-                  <h2>
-                    <i class="fa fa-graduation-cap"></i> Master of Science in
-                    Computational Linguistics
-                  </h2>
-                  <p>
-                    <strong
-                      ><i class="fas fa-university"></i> Montclair State
-                      University: Montclair, NJ</strong
-                    >
-                  </p>
-                  <div class="highlight-box">
-                    <!-- Container to highlight details -->
-                    <p>
-                      <span class="gpa-label">GPA:</span
-                      ><span class="gpa-value">3.96</span>
-                    </p>
-                    <p class="graduation-date">
-                      <i class="fas fa-calendar-alt"></i> Graduated May 2022
-                    </p>
-                  </div>
-
-                  <h3>
-                    <i class="fas fa-project-diagram"></i> Research Projects:
-                  </h3>
-                  <ul>
-                    <!-- prettier-ignore -->
-                    <li>Cross-lingual definition modeling without bilingual corpora</li>
-                    <li>Farsi NLP Tools</li>
-                  </ul>
-                </div>
-              </div>
+            <div id="bookBachelors" class="book" style="width: 125px">
+              <span
+                >B.S.<br />Chemical Engineering <br />&<br />
+                German</span
+              >
+              <div class="book-face book-top-face"></div>
+              <div class="book-face book-right-face"></div>
+              <div class="book-face book-bottom-face"></div>
+              <div class="book-face book-left-face"></div>
             </div>
-
             <div id="modalBachelors" class="modal">
               <div class="modal-content">
                 <span class="close">&times;</span>
@@ -108,61 +74,56 @@
                 </div>
               </div>
             </div>
-
-            <div id="bookBachelors" class="book" style="width: 125px">
-              <span
-                >B.S.<br />Chemical Engineering <br />&<br />
-                German</span
-              >
-              <div class="side-face top-face"></div>
-              <div class="side-face right-face"></div>
-              <div class="side-face bottom-face"></div>
-              <div class="side-face left-face"></div>
-            </div>
             <div id="bookMasters" class="book" style="width: 110px">
               <span>M.S.<br />Computational Linguistics</span>
-              <div class="side-face top-face"></div>
-              <div class="side-face right-face"></div>
-              <div class="side-face bottom-face"></div>
-              <div class="side-face left-face"></div>
+              <div class="book-face book-top-face"></div>
+              <div class="book-face book-right-face"></div>
+              <div class="book-face book-bottom-face"></div>
+              <div class="book-face book-left-face"></div>
             </div>
+            <div id="modalMasters" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-image">
+                  <img
+                    class="university-logo"
+                    src="assets/images/hawk-logo-color-2.svg"
+                    alt="Montclair Logo"
+                  />
+                </div>
+                <div class="modal-info">
+                  <h2>
+                    <i class="fa fa-graduation-cap"></i> Master of Science in
+                    Computational Linguistics
+                  </h2>
+                  <p>
+                    <strong
+                      ><i class="fas fa-university"></i> Montclair State
+                      University: Montclair, NJ</strong
+                    >
+                  </p>
+                  <div class="highlight-box">
+                    <!-- Container to highlight details -->
+                    <p>
+                      <span class="gpa-label">GPA:</span
+                      ><span class="gpa-value">3.96</span>
+                    </p>
+                    <p class="graduation-date">
+                      <i class="fas fa-calendar-alt"></i> Graduated May 2022
+                    </p>
+                  </div>
 
-            <script>
-              var modalMasters = document.getElementById("modalMasters");
-              var modalBachelors = document.getElementById("modalBachelors");
-
-              var btnMasters = document.getElementById("bookMasters");
-              var btnBachelors = document.getElementById("bookBachelors");
-
-              var spanCloseMasters =
-                modalMasters.getElementsByClassName("close")[0];
-              var spanCloseBachelors =
-                modalBachelors.getElementsByClassName("close")[0];
-
-              btnMasters.onclick = function () {
-                modalMasters.classList.add("modal-active");
-              };
-              btnBachelors.onclick = function () {
-                modalBachelors.classList.add("modal-active");
-              };
-
-              // When the user clicks on <span> (x), close the modal
-              spanCloseMasters.onclick = function () {
-                modalMasters.classList.remove("modal-active");
-              };
-              spanCloseBachelors.onclick = function () {
-                modalBachelors.classList.remove("modal-active");
-              };
-
-              // When the user clicks anywhere outside of the modal, close it
-              window.onclick = function (event) {
-                if (event.target == modalMasters) {
-                  modalMasters.classList.remove("modal-active");
-                } else if (event.target == modalBachelors) {
-                  modalBachelors.classList.remove("modal-active");
-                }
-              };
-            </script>
+                  <h3>
+                    <i class="fas fa-project-diagram"></i> Research Projects:
+                  </h3>
+                  <ul>
+                    <!-- prettier-ignore -->
+                    <li>Cross-lingual definition modeling without bilingual corpora</li>
+                    <li>Farsi NLP Tools</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="board-section">
             <div class="shelf-label">EDUCATION</div>
@@ -226,16 +187,16 @@
         <div class="shelf-section">
           <div class="content-section">
             <div class="book">
-              <div class="side-face top-face"></div>
-              <div class="side-face right-face"></div>
-              <div class="side-face bottom-face"></div>
-              <div class="side-face left-face"></div>
+              <div class="book-face book-top-face"></div>
+              <div class="book-face book-right-face"></div>
+              <div class="book-face book-bottom-face"></div>
+              <div class="book-face book-left-face"></div>
             </div>
             <div class="book">
-              <div class="side-face top-face"></div>
-              <div class="side-face right-face"></div>
-              <div class="side-face bottom-face"></div>
-              <div class="side-face left-face"></div>
+              <div class="book-face book-top-face"></div>
+              <div class="book-face book-right-face"></div>
+              <div class="book-face book-bottom-face"></div>
+              <div class="book-face book-left-face"></div>
             </div>
           </div>
           <div class="board-section">
@@ -251,7 +212,15 @@
           </div>
         </div>
         <div class="shelf-section">
-          <div class="content-section"></div>
+          <div class="content-section">
+            <div class="book" style="width: 27px">
+              <span>ϕ</span>
+              <div class="book-face book-top-face"></div>
+              <div class="book-face book-right-face"></div>
+              <div class="book-face book-bottom-face"></div>
+              <div class="book-face book-left-face"></div>
+            </div>
+          </div>
           <div class="board-section">
             <div class="shelf-label"></div>
           </div>
@@ -259,34 +228,34 @@
         <div class="shelf-section">
           <div class="content-section">
             <div class="book" style="width: 27px">
-              <div class="side-face top-face"></div>
-              <div class="side-face right-face"></div>
-              <div class="side-face bottom-face"></div>
-              <div class="side-face left-face"></div>
+              <div class="book-face book-top-face"></div>
+              <div class="book-face book-right-face"></div>
+              <div class="book-face book-bottom-face"></div>
+              <div class="book-face book-left-face"></div>
             </div>
             <div class="book">
-              <div class="side-face top-face"></div>
-              <div class="side-face right-face"></div>
-              <div class="side-face bottom-face"></div>
-              <div class="side-face left-face"></div>
+              <div class="book-face book-top-face"></div>
+              <div class="book-face book-right-face"></div>
+              <div class="book-face book-bottom-face"></div>
+              <div class="book-face book-left-face"></div>
             </div>
             <div class="book" style="width: 18px">
-              <div class="side-face top-face"></div>
-              <div class="side-face right-face"></div>
-              <div class="side-face bottom-face"></div>
-              <div class="side-face left-face"></div>
+              <div class="book-face book-top-face"></div>
+              <div class="book-face book-right-face"></div>
+              <div class="book-face book-bottom-face"></div>
+              <div class="book-face book-left-face"></div>
             </div>
             <div class="book" style="width: 75px">
-              <div class="side-face top-face"></div>
-              <div class="side-face right-face"></div>
-              <div class="side-face bottom-face"></div>
-              <div class="side-face left-face"></div>
+              <div class="book-face book-top-face"></div>
+              <div class="book-face book-right-face"></div>
+              <div class="book-face book-bottom-face"></div>
+              <div class="book-face book-left-face"></div>
             </div>
             <div class="book" style="width: 60px">
-              <div class="side-face top-face"></div>
-              <div class="side-face right-face"></div>
-              <div class="side-face bottom-face"></div>
-              <div class="side-face left-face"></div>
+              <div class="book-face book-top-face"></div>
+              <div class="book-face book-right-face"></div>
+              <div class="book-face book-bottom-face"></div>
+              <div class="book-face book-left-face"></div>
             </div>
           </div>
           <div class="board-section">
@@ -302,5 +271,7 @@
       </div>
     </div>
     <script src="assets/perspective.js"></script>
+
+    <script src="main.js"></script>
   </body>
 </html>

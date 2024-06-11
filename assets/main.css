@@ -9,6 +9,7 @@ html {
   background: #f7f3e9;
   font-family: "Times New Roman", Times, serif;
 }
+
 .bookcase {
   display: flex;
   flex-direction: column;
@@ -103,29 +104,29 @@ html {
   transform-style: preserve-3d;
 }
 
-.side-face {
+.book-face {
   position: absolute;
 }
 
-.right-face {
+.book-right-face {
   transform-origin: left;
   right: 100%;
   background-color: #8c453f;
 }
 
-.left-face {
+.book-left-face {
   transform-origin: right;
   left: 100%;
   background-color: #8c453f;
 }
 
-.top-face {
+.book-top-face {
   transform-origin: bottom;
   bottom: 100%;
   background-color: darkgray;
 }
 
-.bottom-face {
+.book-bottom-face {
   transform-origin: top;
   top: 100%;
   background-color: darkgray;

@@ -43,18 +43,20 @@ function setSpinePerspective(book) {
   const bookRect = book.getBoundingClientRect();
   const centerX = window.innerWidth / 2;
   const centerY = window.innerHeight / 2;
+
+  // book center position relative to the viewport center
   const deltaX = bookRect.left + bookRect.width / 2 - centerX;
   const deltaY = bookRect.top + bookRect.height / 2 - centerY;
+  const distFromCenter = Math.sqrt(deltaX ** 2 + deltaY ** 2);
 
-  // Feel free to tweak these factors to get the effect you desire
+  // perspective factor (related to viewing distance)
   const factor = 0.02;
   const rotateY = deltaX * factor;
   const rotateX = -deltaY * factor;
-  const dist = Math.sqrt(deltaX ** 2 + deltaY ** 2);
 
   return {
     transform: `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`,
-    zIndex: Math.round(1000 - dist),
+    zIndex: Math.round(1000 - distFromCenter),
   };
 }
 
@@ -64,26 +66,26 @@ function setFaceDimensions(book, depth) {
   console.log("height:", bookHeight);
   console.log("width:", bookWidth);
 
-  const rightFace = book.querySelector(".right-face");
+  const rightFace = book.querySelector(".book-right-face");
   rightFace.style.height = `${bookHeight}px`;
   rightFace.style.width = `${depth}px`;
   rightFace.style.transform = `rotateY(90deg) translateZ(${
     bookWidth + depth
   }px)`;
 
-  const leftFace = book.querySelector(".left-face");
+  const leftFace = book.querySelector(".book-left-face");
   leftFace.style.height = `${bookHeight}px`;
   leftFace.style.width = `${depth}px`;
   leftFace.style.transform = `rotateY(90deg) translateZ(-${
     bookWidth + depth
   }px) translateX(${depth}px)`;
 
-  const topFace = book.querySelector(".top-face");
+  const topFace = book.querySelector(".book-top-face");
   topFace.style.width = `${bookWidth}px`;
   topFace.style.height = `${depth}px`;
   topFace.style.transform = `rotateX(90deg)`;
 
-  const bottomFace = book.querySelector(".bottom-face");
+  const bottomFace = book.querySelector(".book-bottom-face");
   bottomFace.style.width = `${bookWidth}px`;
   bottomFace.style.height = `${depth}px`;
   bottomFace.style.transform = `rotateX(90deg) translateY(-${depth}px)`;
@@ -96,10 +98,10 @@ function togglebookFaces(book, centerX, centerY) {
   const bookCenterY = bookRect.top + bookRect.height / 2;
 
   // Set the class for the side faces based on the book position
-  const rightFace = book.querySelector(".right-face");
-  const leftFace = book.querySelector(".left-face");
-  const topFace = book.querySelector(".top-face");
-  const bottomFace = book.querySelector(".bottom-face");
+  const rightFace = book.querySelector(".book-right-face");
+  const leftFace = book.querySelector(".book-left-face");
+  const topFace = book.querySelector(".book-top-face");
+  const bottomFace = book.querySelector(".book-bottom-face");
 
   rightFace.style.display = bookCenterX < centerX ? "block" : "none";
   leftFace.style.display = bookCenterX >= centerX ? "block" : "none";
