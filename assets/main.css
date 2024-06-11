@@ -1,5 +1,8 @@
 :root {
   --shelf-thickness: 25px;
+  --shelfA-z-index: 1000;
+  --shelfB-z-index: 500;
+  --shelfC-z-index: 200;
 }
 
 body,
@@ -44,15 +47,15 @@ html {
 }
 
 #shelfA::after {
-  z-index: 1000;
+  z-index: var(--shelfA-z-index);
 }
 
 #shelfB::after {
-  z-index: 500;
+  z-index: var(--shelfB-z-index);
 }
 
 #shelfC::after {
-  z-index: 200;
+  z-index: var(--shelfC-z-index);
 }
 
 .shelf-section {
@@ -80,6 +83,18 @@ html {
   position: relative;
   white-space: nowrap;
   color: rgb(122, 92, 18);
+}
+
+#shelfA .shelf-label {
+  z-index: calc(var(--shelfA-z-index) + 1);
+}
+
+#shelfB .shelf-label {
+  z-index: calc(var(--shelfB-z-index) + 1);
+}
+
+#shelfC .shelf-label {
+  z-index: calc(var(--shelfC-z-index) + 1);
 }
 
 /* light glare */
