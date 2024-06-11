@@ -75,6 +75,7 @@ const bookBachelors = createBook("bookBachelors", {
   height: 265,
   content: "B.S. Chemical Engineering & German",
 });
+
 const modalBachelors = createEducationModal(
   "modalBachelors",
   "assets/images/Wyoming_Athletics_logo.svg",
@@ -95,6 +96,7 @@ const bookMasters = createBook("bookMasters", {
   height: 265,
   content: "M.S. Computational Linguistics",
 });
+
 const modalMasters = createEducationModal(
   "modalMasters",
   "assets/images/hawk-logo-color-2.svg",

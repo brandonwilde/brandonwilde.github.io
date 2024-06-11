@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
         spinePerspective.transform +
         `translateX(${0}px) translateY(0px) translateZ(100px)`;
       book.style.zIndex = spinePerspective.zIndex;
-      console.log("height:", book.offsetHeight);
-      console.log("width:", book.offsetWidth);
+      // console.log("height:", book.offsetHeight);
+      // console.log("width:", book.offsetWidth);
     } else {
       book.style.transform = spinePerspective.transform;
       book.style.zIndex = spinePerspective.zIndex;
@@ -63,8 +63,8 @@ function setSpinePerspective(book) {
 function setFaceDimensions(book, depth) {
   const bookHeight = book.offsetHeight;
   const bookWidth = book.offsetWidth;
-  console.log("height:", bookHeight);
-  console.log("width:", bookWidth);
+  // console.log("height:", bookHeight);
+  // console.log("width:", bookWidth);
 
   const rightFace = book.querySelector(".book-right-face");
   rightFace.style.height = `${bookHeight}px`;
@@ -93,7 +93,7 @@ function setFaceDimensions(book, depth) {
 
 function togglebookFaces(book, centerX, centerY) {
   const bookRect = book.getBoundingClientRect();
-  console.log("bookRect:", bookRect);
+  // console.log("bookRect:", bookRect);
   const bookCenterX = bookRect.left + bookRect.width / 2;
   const bookCenterY = bookRect.top + bookRect.height / 2;
 
