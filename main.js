@@ -70,7 +70,7 @@ const bookBachelors = createBook("bookBachelors", {
   width: 125,
   content: "B.S. Chemical Engineering & German",
 });
-const modalBachelorsHtml = createEducationModal(
+const modalBachelors = createEducationModal(
   "modalBachelors",
   "assets/images/Wyoming_Athletics_logo.svg",
   "Wyoming Logo",
@@ -83,13 +83,13 @@ const modalBachelorsHtml = createEducationModal(
     "Anti-cancer drug delivery methods",
   ]
 );
-attachModal(bookBachelors, modalBachelorsHtml);
+attachModal(bookBachelors, modalBachelors);
 
 const bookMasters = createBook("bookMasters", {
   width: 110,
   content: "M.S. Computational Linguistics",
 });
-const modalMastersHtml = createEducationModal(
+const modalMasters = createEducationModal(
   "modalMasters",
   "assets/images/hawk-logo-color-2.svg",
   "Montclair Logo",
@@ -102,7 +102,7 @@ const modalMastersHtml = createEducationModal(
     "Farsi NLP Tools",
   ]
 );
-attachModal(bookMasters, modalMastersHtml);
+attachModal(bookMasters, modalMasters);
 
 // Shelf A
 const shelfA = document.getElementById("shelfA");
@@ -111,8 +111,8 @@ const shelfASection0 = shelfASections[0].querySelector(".content-section");
 
 shelfASection0.appendChild(bookBachelors);
 shelfASection0.appendChild(bookMasters);
-shelfASection0.appendChild(modalBachelorsHtml);
-shelfASection0.appendChild(modalMastersHtml);
+shelfASection0.appendChild(modalBachelors);
+shelfASection0.appendChild(modalMasters);
 
 // Shelf B
 const shelfB = document.getElementById("shelfB");
