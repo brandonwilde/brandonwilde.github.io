@@ -32,34 +32,33 @@ html {
   position: relative;
 }
 
+/* Depth of shelf board */
 .shelf::before {
   content: "";
   display: block;
   position: absolute;
   left: 0;
   right: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.4)), url("textures/wood2-h-cropped.png");
   background-size: contain;
-  box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.3);
 }
 
 #shelfA::before {
-  bottom: -12px; /* Position it above the shelf board */
-  height: 12px; /* Set the thickness of the board edge */
+  bottom: -12px;
+  height: 12px;
   background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.4)), url("textures/wood2-h-cropped.png");
   box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.3);
 }
 
 #shelfB::before {
-  bottom: var(--shelf-thickness); /* Position it above the shelf board */
-  height: 5px; /* Set the thickness of the board edge */
+  bottom: var(--shelf-thickness);
+  height: 5px;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("textures/wood2-h-cropped.png");
   box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 #shelfC::before {
-  bottom: var(--shelf-thickness); /* Position it above the shelf board */
-  height: 28px; /* Set the thickness of the board edge */
+  bottom: var(--shelf-thickness);
+  height: 28px;
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.35)), url("textures/wood2-h-cropped.png");
   box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.3);
 }

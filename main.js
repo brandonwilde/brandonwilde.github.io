@@ -19,17 +19,15 @@ function createBook(
   id,
   { content = "", width = 40, height = 200, color = colors.red } = {}
 ) {
-  // Create the book div
   const book = document.createElement("div");
   book.id = id;
   book.className = "book";
   book.style.width = `${width}px`;
   book.style.height = `${height}px`;
   book.style.backgroundColor = `rgb(${color.join(",")})`;
-  dimColor = color.map((val) => val * 0.86);
-  dimColorRgb = `rgb(${dimColor.join(",")})`;
+  const dimColor = color.map((val) => val * 0.86);
+  const dimColorRgb = `rgb(${dimColor.join(",")})`;
 
-  // Create the content span
   const span = document.createElement("span");
 
   // Split the content by <br /> and create a text node and a br element for each part
@@ -96,7 +94,7 @@ const bookBachelors = createBook("bookBachelors", {
   width: 125,
   height: 265,
   color: colors.gray,
-  content: "B.S. Chemical Engineering & German",
+  content: "B.S.<br />Chemical Engineering<br />& German",
 });
 
 const modalBachelors = createEducationModal(
@@ -137,9 +135,9 @@ const modalMasters = createEducationModal(
 attachModal(bookMasters, modalMasters);
 
 const bookAei = createBook("bookAei", {
-  width: 70,
+  width: 85,
   color: colors.gray,
-  content: "AEI",
+  content: "AEI Consultants",
 });
 
 const bookMsu1 = createBook("bookMsu1", {
@@ -162,8 +160,6 @@ const bookInventives = createBook("bookInventives", {
   color: colors.yellowGreen,
   content: "Inventives",
 });
-// const modalInventives = createEducationModal();
-// attachModal(bookInventives, modalInventives);
 
 const bookSyera = createBook("bookSyera", {
   width: 60,
@@ -171,8 +167,6 @@ const bookSyera = createBook("bookSyera", {
   color: colors.red,
   content: "Syera",
 });
-// const modalSyera = createEducationModal();
-// attachModal(bookSyera, modalSyera);
 
 // Shelf A
 const shelfA = document.getElementById("shelfA");
@@ -210,9 +204,7 @@ shelfCSection2.appendChild(bookAei);
 shelfCSection2.appendChild(bookMsu1);
 shelfCSection2.appendChild(bookMsu2);
 shelfCSection2.appendChild(bookInventives);
-// shelfCSection2.appendChild(modalInventives);
 shelfCSection2.appendChild(bookSyera);
-// shelfCSection2.appendChild(modalSyera);
 
 // Close modals
 var modals = document.querySelectorAll(".modal");
