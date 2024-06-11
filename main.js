@@ -4,7 +4,7 @@ function attachModal(button, modal) {
   };
 }
 
-function createBook(id, width, content) {
+function createBook(id, { width = 40, content = "" } = {}) {
   // Create the book div
   const book = document.createElement("div");
   book.id = id;
@@ -66,11 +66,10 @@ function createEducationModal(
   return modal;
 }
 
-const bookBachelors = createBook(
-  "bookBachelors",
-  125,
-  "B.S. Chemical Engineering & German"
-);
+const bookBachelors = createBook("bookBachelors", {
+  width: 125,
+  content: "B.S. Chemical Engineering & German",
+});
 const modalBachelorsHtml = createEducationModal(
   "modalBachelors",
   "assets/images/Wyoming_Athletics_logo.svg",
@@ -86,11 +85,10 @@ const modalBachelorsHtml = createEducationModal(
 );
 attachModal(bookBachelors, modalBachelorsHtml);
 
-const bookMasters = createBook(
-  "bookMasters",
-  110,
-  "M.S. Computational Linguistics"
-);
+const bookMasters = createBook("bookMasters", {
+  width: 110,
+  content: "M.S. Computational Linguistics",
+});
 const modalMastersHtml = createEducationModal(
   "modalMasters",
   "assets/images/hawk-logo-color-2.svg",
@@ -106,17 +104,37 @@ const modalMastersHtml = createEducationModal(
 );
 attachModal(bookMasters, modalMastersHtml);
 
+// Shelf A
 const shelfA = document.getElementById("shelfA");
 const shelfASections = shelfA.querySelectorAll(".shelf-section");
-const shelfASection0 = shelfASections[0];
-const shelfASection0Content = shelfASection0.querySelector(".content-section");
+const shelfASection0 = shelfASections[0].querySelector(".content-section");
 
-shelfASection0Content.appendChild(bookBachelors);
-shelfASection0Content.appendChild(bookMasters);
-shelfASection0Content.appendChild(modalBachelorsHtml);
-shelfASection0Content.appendChild(modalMastersHtml);
+shelfASection0.appendChild(bookBachelors);
+shelfASection0.appendChild(bookMasters);
+shelfASection0.appendChild(modalBachelorsHtml);
+shelfASection0.appendChild(modalMastersHtml);
 
+// Shelf B
 const shelfB = document.getElementById("shelfB");
+const shelfBSections = shelfB.querySelectorAll(".shelf-section");
+const shelfBSection3 = shelfBSections[3].querySelector(".content-section");
+
+shelfBSection3.appendChild(createBook("book1"));
+shelfBSection3.appendChild(createBook("book2"));
+
+// Shelf C
+const shelfC = document.getElementById("shelfC");
+const shelfCSections = shelfC.querySelectorAll(".shelf-section");
+const shelfCSection1 = shelfCSections[1].querySelector(".content-section");
+const shelfCSection2 = shelfCSections[2].querySelector(".content-section");
+
+shelfCSection1.appendChild(createBook("book3", { width: 27, content: "ϕ" }));
+
+shelfCSection2.appendChild(createBook("book4", { width: 27 }));
+shelfCSection2.appendChild(createBook("book5"));
+shelfCSection2.appendChild(createBook("book6", { width: 18 }));
+shelfCSection2.appendChild(createBook("book7", { width: 75 }));
+shelfCSection2.appendChild(createBook("book8", { width: 60 }));
 
 // Close modals
 var modals = document.querySelectorAll(".modal");
