@@ -97,12 +97,13 @@ html {
   margin-bottom: var(--shelf-thickness);
   display: flex;
   justify-content: center;
+  align-items: flex-end;
 }
 
 .book {
   height: 200px;
   background: #a2504a;
-  margin: 0 15px;
+  margin: 0 10px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: transform 0.3s;

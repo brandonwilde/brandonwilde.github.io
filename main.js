@@ -4,12 +4,13 @@ function attachModal(button, modal) {
   };
 }
 
-function createBook(id, { width = 40, content = "" } = {}) {
+function createBook(id, { width = 40, height = 200, content = "" } = {}) {
   // Create the book div
   const book = document.createElement("div");
   book.id = id;
   book.className = "book";
   book.style.width = `${width}px`;
+  book.style.height = `${height}px`;
 
   // Create the content span
   const span = document.createElement("span");
@@ -58,16 +59,20 @@ function createEducationModal(
   modal.querySelector(".graduation-date").textContent = graduationDate;
 
   const ul = modal.querySelector(".research-projects");
-  projects.forEach((project) => {
-    const li = document.createElement("li");
-    li.textContent = project;
-    ul.appendChild(li);
-  });
+
+  if (projects !== undefined) {
+    projects.forEach((project) => {
+      const li = document.createElement("li");
+      li.textContent = project;
+      ul.appendChild(li);
+    });
+  }
   return modal;
 }
 
 const bookBachelors = createBook("bookBachelors", {
   width: 125,
+  height: 265,
   content: "B.S. Chemical Engineering & German",
 });
 const modalBachelors = createEducationModal(
@@ -87,6 +92,7 @@ attachModal(bookBachelors, modalBachelors);
 
 const bookMasters = createBook("bookMasters", {
   width: 110,
+  height: 265,
   content: "M.S. Computational Linguistics",
 });
 const modalMasters = createEducationModal(
@@ -104,6 +110,39 @@ const modalMasters = createEducationModal(
 );
 attachModal(bookMasters, modalMasters);
 
+const bookAei = createBook("bookAei", {
+  width: 70,
+  content: "AEI",
+});
+
+const bookMsu1 = createBook("bookMsu1", {
+  width: 50,
+  height: 200,
+  content: "MSU",
+});
+
+const bookMsu2 = createBook("bookMsu2", {
+  width: 40,
+  height: 220,
+  content: "MSU",
+});
+
+const bookInventives = createBook("bookInventives", {
+  width: 80,
+  height: 250,
+  content: "Inventives",
+});
+// const modalInventives = createEducationModal();
+// attachModal(bookInventives, modalInventives);
+
+const bookSyera = createBook("bookSyera", {
+  width: 60,
+  height: 180,
+  content: "Syera",
+});
+// const modalSyera = createEducationModal();
+// attachModal(bookSyera, modalSyera);
+
 // Shelf A
 const shelfA = document.getElementById("shelfA");
 const shelfASections = shelfA.querySelectorAll(".shelf-section");
@@ -119,7 +158,7 @@ const shelfB = document.getElementById("shelfB");
 const shelfBSections = shelfB.querySelectorAll(".shelf-section");
 const shelfBSection3 = shelfBSections[3].querySelector(".content-section");
 
-shelfBSection3.appendChild(createBook("book1"));
+shelfBSection3.appendChild(createBook("book1", { height: 240 }));
 shelfBSection3.appendChild(createBook("book2"));
 
 // Shelf C
@@ -130,11 +169,13 @@ const shelfCSection2 = shelfCSections[2].querySelector(".content-section");
 
 shelfCSection1.appendChild(createBook("book3", { width: 27, content: "ϕ" }));
 
-shelfCSection2.appendChild(createBook("book4", { width: 27 }));
-shelfCSection2.appendChild(createBook("book5"));
-shelfCSection2.appendChild(createBook("book6", { width: 18 }));
-shelfCSection2.appendChild(createBook("book7", { width: 75 }));
-shelfCSection2.appendChild(createBook("book8", { width: 60 }));
+shelfCSection2.appendChild(bookAei);
+shelfCSection2.appendChild(bookMsu1);
+shelfCSection2.appendChild(bookMsu2);
+shelfCSection2.appendChild(bookInventives);
+// shelfCSection2.appendChild(modalInventives);
+shelfCSection2.appendChild(bookSyera);
+// shelfCSection2.appendChild(modalSyera);
 
 // Close modals
 var modals = document.querySelectorAll(".modal");
