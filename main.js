@@ -75,10 +75,17 @@ function createEducationModal(
 
   modal.querySelector(".university-logo").src = logoSrc;
   modal.querySelector(".university-logo").alt = logoAlt;
-  modal.querySelector(".modal-info h2").textContent = degree;
-  modal.querySelector(".modal-info strong").textContent = university;
+
+  const degreeTextNode = document.createTextNode(" " + degree);
+  modal.querySelector(".modal-info h2").appendChild(degreeTextNode);
+
+  const universityTextNode = document.createTextNode(" " + university);
+  modal.querySelector(".modal-info strong").appendChild(universityTextNode);
+
   modal.querySelector(".gpa-value").textContent = gpa;
-  modal.querySelector(".graduation-date").textContent = graduationDate;
+
+  const graduationTextNode = document.createTextNode(" " + graduationDate);
+  modal.querySelector(".graduation-date").appendChild(graduationTextNode);
 
   const ul = modal.querySelector(".research-projects");
 
