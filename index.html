@@ -139,6 +139,39 @@
         </div>
       </div>
     </template>
+    <template id="businessCardModalTemplate">
+      <div class="modal">
+        <div class="modal-content business-card-modal">
+          <span class="close">&times;</span>
+          <div class="business-card">
+            <div class="header">
+              <div class="left">
+                <h1 id="name"></h1>
+                <h2 class="jobTitle" id="jobTitle1"></h2>
+                <h2 class="jobTitle" id="jobTitle2"></h2>
+              </div>
+              <div class="right">
+                <img id="personalLogo" alt="Personal Logo" />
+              </div>
+            </div>
+            <div class="footer">
+              <p class="email">
+                <strong>Email:</strong>
+                <img id="email" />
+              </p>
+              <p>
+                <strong>LinkedIn:</strong>
+                <a id="linkedin" href="#" target="_blank"></a>
+              </p>
+              <p>
+                <strong>GitHub:</strong>
+                <a id="github" href="#" target="_blank"></a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
     <script src="assets/perspective.js"></script>
     <script src="main.js"></script>
   </body>

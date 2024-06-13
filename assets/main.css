@@ -2,7 +2,7 @@
   --shelf-thickness: 25px;
   --shelfA-z-index: 1000;
   --shelfB-z-index: 500;
-  --shelfC-z-index: 200;
+  --shelfC-z-index: 100;
 }
 
 body,
@@ -280,6 +280,83 @@ html {
   margin-top: 10px;
 }
 
+.business-card-modal {
+  display: flex;
+  flex-direction: column;
+  background: #f4f4f9;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 450px;
+}
+
+.business-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0px 20px 0px;
+}
+
+.header .left {
+  flex: 0 0 auto;
+  padding-left: 20px;
+}
+
+.header .left h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.header .jobTitle {
+  font-size: 18px;
+  color: #555;
+  margin: 5px 0 0 0;
+}
+
+.header .right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header .right #personalLogo {
+  height: 100px;
+  object-fit:cover;
+}
+
+.footer {
+  padding: 10px 0 0 20px;
+  font-size: 14px;
+  color: #333;
+  border-top: 1px solid #ccc;
+}
+
+.footer p {
+  line-height: 1;
+  margin: 0px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+#email {
+  height: 1em;
+  vertical-align: sub;
+}
+
 .close {
   color: #333;
   float: right;
@@ -294,11 +371,6 @@ html {
   cursor: pointer;
 }
 
-.modal-content h2 {
-  font-size: 24px;
-  margin-bottom: .5em;
-}
-
 .modal-content h3 {
   font-size: 20px;
   margin-top: 1em;
@@ -310,14 +382,9 @@ html {
   line-height: 1.6;
 }
 
-/* .modal-content strong {
-  color: #007bff;
-  font-weight: normal;
-} */
-
 .modal-content ul {
-  list-style-type: none; /* Remove default bullets */
-  padding: 0; /* Remove default padding */
+  list-style-type: none;
+  padding: 0;
 }
 
 .modal-content li::before {
