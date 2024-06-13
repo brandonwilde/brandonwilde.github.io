@@ -16,6 +16,13 @@ function attachModal(button, modal) {
   };
 }
 
+function closeModalOnX(modal) {
+  var spanClose = modal.getElementsByClassName("close")[0];
+  spanClose.onclick = function () {
+    modal.classList.remove("modal-active");
+  };
+}
+
 function createBlock(
   id,
   { content = "", width = 40, height = 200, color = colors.red } = {}
@@ -58,18 +65,14 @@ function createBlock(
 
 function createEducationModal(
   id,
-  logoSrc,
-  logoAlt,
-  degree,
-  university,
-  gpa,
-  graduationDate,
-  projects
+  { logoSrc, logoAlt, degree, university, gpa, graduationDate, projects }
 ) {
   const template = document.getElementById("educationModalTemplate");
   const fragment = template.content.cloneNode(true);
   const modal = fragment.querySelector(".modal");
   modal.id = id;
+  closeModalOnX(modal);
+
   modal.querySelector(".university-logo").src = logoSrc;
   modal.querySelector(".university-logo").alt = logoAlt;
   modal.querySelector(".modal-info h2").textContent = degree;
@@ -86,6 +89,7 @@ function createEducationModal(
       ul.appendChild(li);
     });
   }
+
   return modal;
 }
 
@@ -94,6 +98,8 @@ function createBusinessCardModal() {
   const fragment = template.content.cloneNode(true);
   const modal = fragment.querySelector(".modal");
   modal.id = "modalBusinessCards";
+  closeModalOnX(modal);
+
   modal.querySelector("#name").textContent = "Brandon Wilde";
   modal.querySelector("#jobTitle1").textContent = "Machine Learning Engineer";
   modal.querySelector("#jobTitle2").textContent = "Chemical Engineer";
@@ -117,19 +123,19 @@ const bookBachelors = createBlock("bookBachelors", {
   content: "B.S.<br />Chemical Engineering<br />& German",
 });
 
-const modalBachelors = createEducationModal(
-  "modalBachelors",
-  "assets/images/Wyoming_Athletics_logo.svg",
-  "Wyoming Logo",
-  "Bachelor of Science in German, Chemical Engineering, Engineering Honors",
-  "University of Wyoming: Laramie, WY",
-  "3.68",
-  "Graduated May 2018",
-  [
+const modalBachelors = createEducationModal("modalBachelors", {
+  logoSrc: "assets/images/Wyoming_Athletics_logo.svg",
+  logoAlt: "Wyoming Logo",
+  degree:
+    "Bachelor of Science in German, Chemical Engineering, Engineering Honors",
+  university: "University of Wyoming: Laramie, WY",
+  gpa: "3.68",
+  graduationDate: "Graduated May 2018",
+  projects: [
     "Carbon capture and storage (CCS) innovative cost recovery",
     "Anti-cancer drug delivery methods",
-  ]
-);
+  ],
+});
 attachModal(bookBachelors, modalBachelors);
 
 const bookMasters = createBlock("bookMasters", {
@@ -139,19 +145,18 @@ const bookMasters = createBlock("bookMasters", {
   content: "M.S. Computational Linguistics",
 });
 
-const modalMasters = createEducationModal(
-  "modalMasters",
-  "assets/images/hawk-logo-color-2.svg",
-  "Montclair Logo",
-  "Master of Science in Computational Linguistics",
-  "Montclair State University: Montclair, NJ",
-  "3.96",
-  "Graduated May 2022",
-  [
+const modalMasters = createEducationModal("modalMasters", {
+  logoSrc: "assets/images/hawk-logo-color-2.svg", // TODO: Add Montclair logo
+  logoAlt: "Montclair Logo",
+  degree: "Master of Science in Computational Linguistics",
+  university: "Montclair State University: Montclair, NJ",
+  gpa: "3.96",
+  graduationDate: "Graduated May 2022",
+  projects: [
     "Cross-lingual definition modeling without bilingual corpora",
     "Farsi NLP Tools",
-  ]
-);
+  ],
+});
 attachModal(bookMasters, modalMasters);
 
 const bookAei = createBlock("bookAei", {
@@ -240,17 +245,8 @@ shelfCSection2.appendChild(bookSyera);
 shelfCSection3.appendChild(businessCards);
 shelfCSection3.appendChild(modalBusinessCards);
 
-// Close modals
-var modals = document.querySelectorAll(".modal");
-modals.forEach((modal) => {
-  var spanClose = modal.getElementsByClassName("close")[0];
-  spanClose.onclick = function () {
-    modal.classList.remove("modal-active");
-  };
-});
-
+// Close modals when clicking outside the modal content
 window.onclick = function (event) {
-  // Close modals when clicking outside the modal content
   if (event.target.classList.contains("modal")) {
     event.target.classList.remove("modal-active");
   }
