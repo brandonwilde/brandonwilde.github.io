@@ -4,18 +4,22 @@ document.addEventListener("DOMContentLoaded", function () {
   books.forEach((book, index) => {
     book.addEventListener("mouseover", () => {
       book.classList.add("hovered");
-      updateRotation(book);
+      if (book.classList.contains("has-modal")) {
+        updatePosition(book);
+      }
     });
 
     book.addEventListener("mouseout", () => {
       book.classList.remove("hovered");
-      updateRotation(book);
+      if (book.classList.contains("has-modal")) {
+        updatePosition(book);
+      }
     });
 
-    updateRotation(book);
+    updatePosition(book);
   });
 
-  function updateRotation(book) {
+  function updatePosition(book) {
     const viewportWidth = window.innerWidth;
     const bookRect = book.getBoundingClientRect();
     const bookCenterX = bookRect.left + bookRect.width / 2;
@@ -29,8 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
         spinePerspective.transform +
         `translateX(${0}px) translateY(0px) translateZ(100px)`;
       book.style.zIndex = spinePerspective.zIndex;
-      // console.log("height:", book.offsetHeight);
-      // console.log("width:", book.offsetWidth);
     } else {
       book.style.transform = spinePerspective.transform;
       book.style.zIndex = spinePerspective.zIndex;
@@ -63,8 +65,6 @@ function setSpinePerspective(book) {
 function setFaceDimensions(book, depth) {
   const bookHeight = book.offsetHeight;
   const bookWidth = book.offsetWidth;
-  // console.log("height:", bookHeight);
-  // console.log("width:", bookWidth);
 
   const rightFace = book.querySelector(".book-right-face");
   rightFace.style.height = `${bookHeight}px`;
@@ -93,7 +93,6 @@ function setFaceDimensions(book, depth) {
 
 function togglebookFaces(book, centerX, centerY) {
   const bookRect = book.getBoundingClientRect();
-  // console.log("bookRect:", bookRect);
   const bookCenterX = bookRect.left + bookRect.width / 2;
   const bookCenterY = bookRect.top + bookRect.height / 2;
 

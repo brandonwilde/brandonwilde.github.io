@@ -10,8 +10,9 @@ const colors = {
   white: [147, 147, 147],
 };
 
-function attachModal(button, modal) {
-  button.onclick = function () {
+function attachModal(block, modal) {
+  block.classList.add("has-modal");
+  block.onclick = function () {
     modal.classList.add("modal-active");
   };
 }
