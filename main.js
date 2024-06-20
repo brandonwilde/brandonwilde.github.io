@@ -100,6 +100,39 @@ function createEducationModal(
   return modal;
 }
 
+function createJobModal(
+  id,
+  { logoSrc, logoAlt, company, position, startDate, endDate, accomplishments }
+) {
+  const template = document.getElementById("jobModalTemplate");
+  const fragment = template.content.cloneNode(true);
+  const modal = fragment.querySelector(".modal");
+  modal.id = id;
+  closeModalOnX(modal);
+
+  // modal.querySelector(".company-logo").src = logoSrc;
+  // modal.querySelector(".company-logo").alt = logoAlt;
+  modal.querySelector(".job-position").textContent = position;
+
+  const companyTextNode = document.createTextNode(" " + company);
+  modal.querySelector(".modal-info strong").appendChild(companyTextNode);
+
+  const DateTextNode = document.createTextNode(` ${startDate} – ${endDate}`);
+  modal.querySelector(".job-dates").appendChild(DateTextNode);
+
+  const ul = modal.querySelector(".job-accomplishments");
+
+  if (accomplishments !== undefined) {
+    accomplishments.forEach((accomplishment) => {
+      const li = document.createElement("li");
+      li.textContent = accomplishment;
+      ul.appendChild(li);
+    });
+  }
+
+  return modal;
+}
+
 function createBusinessCardModal() {
   const template = document.getElementById("businessCardModalTemplate");
   const fragment = template.content.cloneNode(true);
@@ -199,6 +232,17 @@ const bookSyera = createBlock("bookSyera", {
   color: colors.red,
   content: "Syera",
 });
+const modalSyera = createJobModal("modalSyera", {
+  company: "Syera",
+  position: "Software Engineer",
+  startDate: "January 2024",
+  endDate: "Present",
+  accomplishments: [
+    "Architecting and developing core software, designing and building intelligent document processing and data extraction systems using ML and NLP techniques.",
+    "Engineering scalable, cloud-based infrastructure to transform legal case documents into intuitive visual timelines, enabling rapid evidence discovery.",
+  ],
+});
+attachModal(bookSyera, modalSyera);
 
 const businessCards = createBlock("businessCards", {
   width: 100,
@@ -248,6 +292,7 @@ shelfCSection2.appendChild(bookMsu1);
 shelfCSection2.appendChild(bookMsu2);
 shelfCSection2.appendChild(bookInventives);
 shelfCSection2.appendChild(bookSyera);
+shelfCSection2.appendChild(modalSyera);
 
 shelfCSection3.appendChild(businessCards);
 shelfCSection3.appendChild(modalBusinessCards);
