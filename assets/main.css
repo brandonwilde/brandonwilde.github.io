@@ -146,12 +146,15 @@ html {
   align-items: flex-end;
 }
 
+.has-modal {
+  cursor: pointer;
+}
+
 .book {
   height: 200px;
   background: #a2504a;
   margin: 0 10px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
   transition: transform 0.3s;
   position: relative;
   display: flex;
