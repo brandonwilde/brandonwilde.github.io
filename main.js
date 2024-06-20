@@ -229,25 +229,73 @@ const modalMasters = createEducationModal("modalMasters", {
 });
 attachModal(bookMasters, modalMasters);
 
-const bookAei = createBlock("bookAei", {
-  width: 85,
-  color: colors.gray,
-  content: "AEI Consultants",
-});
+const aei = createJobExperience(
+  "Aei",
+  {
+    width: 85,
+    color: colors.gray,
+    content: "AEI",
+  },
+  {
+    company: "AEI Consultants",
+    position: "Staff Engineer",
+    startDate: "September 2018",
+    endDate: "May 2022",
+    accomplishments: [
+      "Directed hundreds of environmental investigations and remediation projects across residential, commercial, and industrial properties, concluding each with a technical report for clientele.",
+      "Expertly crafted precise, scaled CAD figures encompassing site layouts, isoconcentration maps, as well as detailed cross-sectional illustrations of geology and contaminant distributions.",
+      "Automated the creation of conditional, format-specific contaminant reporting tables using Excel VBA.",
+    ],
+  }
+);
 
 const bookMsu1 = createBlock("bookMsu1", {
   width: 50,
   height: 200,
-  color: colors.yellowGreen,
-  content: "MSU",
-});
-
-const bookMsu2 = createBlock("bookMsu2", {
-  width: 40,
-  height: 220,
   color: colors.red,
   content: "MSU",
 });
+
+const msu1 = createJobExperience(
+  "Msu1",
+  {
+    width: 50,
+    height: 200,
+    color: colors.red,
+    content: "MSU",
+  },
+  {
+    company: "Montclair State University",
+    position: "Graduate Research Assistant",
+    startDate: "September 2021",
+    endDate: "June 2022",
+    accomplishments: [
+      "Independently pioneered a research initiative in zero-shot cross-lingual definition generation utilizing deep learning techniques.",
+      "Appointed as a Teaching Assistant for APLN 550 (Computational Linguistics), providing support through tutoring and assignment grading.",
+      "Entrusted with full instructional duties  for half of the semester, led the graduate course during the professor's leave of absence with success.",
+    ],
+  }
+);
+
+const msu2 = createJobExperience(
+  "Msu2",
+  {
+    width: 40,
+    height: 220,
+    color: colors.red,
+    content: "MSU",
+  },
+  {
+    company: "Montclair State University",
+    position: "Adjunct Lecturer",
+    startDate: "August 2022",
+    endDate: "December 2022",
+    accomplishments: [
+      "Developed and taught LNGN 445, a beginner-friendly course in Natural Language Processing, with a significant emphasis on Python programming to reinforce theoretical knowledge with practical skills.",
+      "Crafted a syllabus that integrates Python coding from the ground up, enabling students with little or no programming experience to master foundational NLP techniques.",
+    ],
+  }
+);
 
 const inventives = createJobExperience(
   "Inventives",
@@ -256,14 +304,25 @@ const inventives = createJobExperience(
     height: 250,
     color: colors.yellowGreen,
     content: "Inventives",
+  },
+  {
+    company: "Inventives",
+    position: "Artificial Intelligence Developer",
+    startDate: "June 2022",
+    endDate: "January 2024",
+    accomplishments: [
+      "Engineering lead for medical record analysis product, designing the system, backend API, and innovative document analysis methods.",
+      "Developed a performant spore counting software for an international biological firm, employing computer vision to identify and enumerate spores in large images, drastically boosting research efficiency.",
+      "Optimized a Retrieval-Augmented Generation (RAG) system enabling LLM responses to incorporate information from client databases.",
+      "Advanced voice synthesis technology for a digital alter ego platform, enabling user-customizable pronunciations and enriching voice realism.",
+      "Architected and built a robust file storage and retrieval system, engineered for use in diverse applications.",
+      "Designed bespoke machine learning classifiers with high precision, fostering intelligent document organization.",
+      "Instituted comprehensive AI model performance evaluation frameworks as well as tools for gauging live performance and reliability of outputs.",
+      "Revolutionized client workflows by automating complex browser tasks using Selenium, effectively eliminating hours of tedium.",
+      "Engineered a sophisticated, clean frontend application to serve as a file explorer and search tool for a client’s private database.",
+      "Diligently maintained production-level codebases for both backend and frontend infrastructures, ensuring excellent user experience.",
+    ],
   }
-  // {
-  //   company: "Inventives",
-  //   position: "Software Engineer",
-  //   startDate: "May 2022",
-  //   endDate: "January 2024",
-  //   accomplishments: [],
-  // }
 );
 
 const syera = createJobExperience(
@@ -271,7 +330,7 @@ const syera = createJobExperience(
   {
     width: 60,
     height: 180,
-    color: colors.red,
+    color: colors.blue,
     content: "Syera",
   },
   {
@@ -329,11 +388,7 @@ shelfCSection1.appendChild(
   createBlock("book3", { width: 27, color: colors.blue, content: "ϕ" })
 );
 
-shelfCSection2.appendChild(bookAei);
-shelfCSection2.appendChild(bookMsu1);
-shelfCSection2.appendChild(bookMsu2);
-// shelfCSection2.appendChild(bookInventives);
-addItems(shelfCSection2, [inventives, syera]);
+addItems(shelfCSection2, [aei, msu1, msu2, inventives, syera]);
 
 shelfCSection3.appendChild(businessCards);
 shelfCSection3.appendChild(modalBusinessCards);
