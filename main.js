@@ -1,13 +1,17 @@
 const colors = {
   red: [98, 55, 55],
   lightRed: [162, 80, 74],
-  green: [77, 98, 89],
-  blue: [74, 104, 162],
+  brightRed: [89, 14, 23],
+  brown: [72, 56, 50],
   yellow: [162, 128, 27],
   yellowGreen: [106, 99, 69],
-  purple: [92, 77, 132],
-  gray: [115, 115, 115],
+  green: [77, 98, 89],
+  aqua: [68, 97, 111],
+  blue: [74, 104, 162],
+  purple: [80, 68, 111],
   white: [147, 147, 147],
+  gray: [115, 115, 115],
+  black: [64, 64, 64],
 };
 
 function attachModal(block, modal) {
@@ -200,7 +204,7 @@ const bachelors = createEducation(
   {
     width: 125,
     height: 265,
-    color: colors.gray,
+    color: colors.brown,
     content: "B.S.<br />Chemical Engineering<br />& German",
   },
   {
@@ -383,14 +387,38 @@ function addItems(shelf, section, items) {
 
 // Add items to shelves (Shelves A, B, C and Sections 0, 1, 2, 3)
 addItems("A", 0, [bachelors, masters]);
+addItems("A", 2, [
+  createBlock("bookA2a", { height: 150, color: colors.gray }),
+  createBlock("bookA2b", { width: 20, color: colors.purple }),
+  createBlock("bookA2c", { width: 30, color: colors.purple }),
+  createBlock("bookA2d", { height: 210, color: colors.yellowGreen }),
+]);
 
+addItems("B", 0, [
+  createBlock("bookB0a", { height: 180, color: colors.gray }),
+  createBlock("bookB0b", { width: 30, color: colors.yellowGreen }),
+  createBlock("bookB0c", { width: 50, color: colors.brown }),
+  createBlock("bookB0d", { width: 35, color: colors.gray }),
+  createBlock("bookB0e", { width: 20, height: 240, color: colors.white }),
+  createBlock("bookB0f", { color: colors.black }),
+  createBlock("bookB0g", { width: 50, height: 180, color: colors.brown }),
+]);
+// addItems("B", 1, [
+//   createBlock("bookB1a", { width: 50, color: colors.brown }),
+//   createBlock("bookB1b", { width: 35, color: colors.gray }),
+//   createBlock("bookB1c", { width: 26, height: 300, color: colors.white }),
+// ]);
+addItems("B", 2, [
+  createBlock("bookB2a", { height: 180, color: colors.yellow }),
+  createBlock("bookB2b", { width: 30, color: colors.gray }),
+]);
 addItems("B", 3, [
-  createBlock("book1", { height: 240, color: colors.gray }),
-  createBlock("book2", { color: colors.yellowGreen, content: "Δ" }),
+  createBlock("bookB3a", { height: 240, color: colors.gray }),
+  createBlock("bookB3b", { color: colors.yellowGreen, content: "Δ" }),
 ]);
 
 addItems("C", 1, [
-  createBlock("book3", { width: 27, color: colors.blue, content: "ϕ" }),
+  createBlock("bookC1a", { width: 27, color: colors.blue, content: "ϕ" }),
 ]);
 addItems("C", 2, [aei, msu1, msu2, inventives, syera]);
 addItems("C", 3, [businessCards]);
