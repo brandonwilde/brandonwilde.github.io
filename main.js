@@ -413,13 +413,11 @@ addItems("B", 2, [
   createBlock("bookB2b", { width: 30, color: colors.gray }),
 ]);
 addItems("B", 3, [
-  createBlock("bookB3a", { height: 240, color: colors.gray }),
+  createBlock("bookB3a", { height: 240, color: colors.gray, content: "ϕ" }),
   createBlock("bookB3b", { color: colors.yellowGreen, content: "Δ" }),
 ]);
 
-addItems("C", 1, [
-  createBlock("bookC1a", { width: 27, color: colors.blue, content: "ϕ" }),
-]);
+addItems("C", 1, [createBlock("bookC1a", { width: 27, color: colors.blue })]);
 addItems("C", 2, [aei, msu1, msu2, inventives, syera]);
 addItems("C", 3, [businessCards]);
 
