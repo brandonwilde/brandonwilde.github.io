@@ -63,41 +63,60 @@ function createBlock(
   return book;
 }
 
-function createEducationModal(
+function createEducation(
   id,
-  { logoSrc, logoAlt, degree, university, gpa, graduationDate, projects }
+  book = { content: "", width: 40, height: 200, color: colors.red },
+  edu // = { logoSrc, logoAlt, degree, university, gpa, graduationDate, projects: [] }
 ) {
-  const template = document.getElementById("educationModalTemplate");
-  const fragment = template.content.cloneNode(true);
-  const modal = fragment.querySelector(".modal");
-  modal.id = id;
-  closeModalOnX(modal);
+  const bookBlock = createBlock(`book${id}`, {
+    width: book.width,
+    height: book.height,
+    color: book.color,
+    content: book.content,
+  });
 
-  modal.querySelector(".university-logo").src = logoSrc;
-  modal.querySelector(".university-logo").alt = logoAlt;
+  const degree = {
+    block: bookBlock,
+  };
 
-  const degreeTextNode = document.createTextNode(" " + degree);
-  modal.querySelector(".modal-info h2").appendChild(degreeTextNode);
+  if (edu) {
+    const template = document.getElementById("educationModalTemplate");
+    const fragment = template.content.cloneNode(true);
+    const modal = fragment.querySelector(".modal");
+    modal.id = `modal${id}`;
+    closeModalOnX(modal);
 
-  const universityTextNode = document.createTextNode(" " + university);
-  modal.querySelector(".modal-info strong").appendChild(universityTextNode);
+    modal.querySelector(".university-logo").src = edu.logoSrc;
+    modal.querySelector(".university-logo").alt = edu.logoAlt;
 
-  modal.querySelector(".gpa-value").textContent = gpa;
+    const degreeTextNode = document.createTextNode(" " + edu.degree);
+    modal.querySelector(".modal-info h2").appendChild(degreeTextNode);
 
-  const graduationTextNode = document.createTextNode(" " + graduationDate);
-  modal.querySelector(".graduation-date").appendChild(graduationTextNode);
+    const universityTextNode = document.createTextNode(" " + edu.university);
+    modal.querySelector(".modal-info strong").appendChild(universityTextNode);
 
-  const ul = modal.querySelector(".research-projects");
+    modal.querySelector(".gpa-value").textContent = edu.gpa;
 
-  if (projects !== undefined) {
-    projects.forEach((project) => {
-      const li = document.createElement("li");
-      li.textContent = project;
-      ul.appendChild(li);
-    });
+    const graduationTextNode = document.createTextNode(
+      " " + edu.graduationDate
+    );
+    modal.querySelector(".graduation-date").appendChild(graduationTextNode);
+
+    const ul = modal.querySelector(".research-projects");
+
+    if (edu.projects !== undefined) {
+      edu.projects.forEach((project) => {
+        const li = document.createElement("li");
+        li.textContent = project;
+        ul.appendChild(li);
+      });
+    }
+
+    attachModal(bookBlock, modal);
+    degree.modal = modal;
   }
 
-  return modal;
+  return degree;
 }
 
 function createJobExperience(
@@ -186,48 +205,50 @@ function addItems(shelf, items) {
   });
 }
 
-const bookBachelors = createBlock("bookBachelors", {
-  width: 125,
-  height: 265,
-  color: colors.gray,
-  content: "B.S.<br />Chemical Engineering<br />& German",
-});
+const bachelors = createEducation(
+  "Bachelors",
+  {
+    width: 125,
+    height: 265,
+    color: colors.gray,
+    content: "B.S.<br />Chemical Engineering<br />& German",
+  },
+  {
+    logoSrc: "assets/images/Wyoming_Athletics_logo.svg",
+    logoAlt: "Wyoming Logo",
+    degree:
+      "Bachelor of Science in German, Chemical Engineering, Engineering Honors",
+    university: "University of Wyoming: Laramie, WY",
+    gpa: "3.68",
+    graduationDate: "Graduated May 2018",
+    projects: [
+      "Carbon capture and storage (CCS) innovative cost recovery",
+      "Anti-cancer drug delivery methods",
+    ],
+  }
+);
 
-const modalBachelors = createEducationModal("modalBachelors", {
-  logoSrc: "assets/images/Wyoming_Athletics_logo.svg",
-  logoAlt: "Wyoming Logo",
-  degree:
-    "Bachelor of Science in German, Chemical Engineering, Engineering Honors",
-  university: "University of Wyoming: Laramie, WY",
-  gpa: "3.68",
-  graduationDate: "Graduated May 2018",
-  projects: [
-    "Carbon capture and storage (CCS) innovative cost recovery",
-    "Anti-cancer drug delivery methods",
-  ],
-});
-attachModal(bookBachelors, modalBachelors);
-
-const bookMasters = createBlock("bookMasters", {
-  width: 110,
-  height: 265,
-  color: colors.yellowGreen,
-  content: "M.S. Computational Linguistics",
-});
-
-const modalMasters = createEducationModal("modalMasters", {
-  logoSrc: "assets/images/hawk-logo-color-2.svg", // TODO: Add Montclair logo
-  logoAlt: "Montclair Logo",
-  degree: "Master of Science in Computational Linguistics",
-  university: "Montclair State University: Montclair, NJ",
-  gpa: "3.96",
-  graduationDate: "Graduated May 2022",
-  projects: [
-    "Cross-lingual definition modeling without bilingual corpora",
-    "Farsi NLP Tools",
-  ],
-});
-attachModal(bookMasters, modalMasters);
+const masters = createEducation(
+  "Masters",
+  {
+    width: 110,
+    height: 265,
+    color: colors.red,
+    content: "M.S.<br />Computational Linguistics",
+  },
+  {
+    logoSrc: "assets/images/hawk-logo-color-2.svg",
+    logoAlt: "Montclair Logo",
+    degree: "Master of Science in Computational Linguistics",
+    university: "Montclair State University: Montclair, NJ",
+    gpa: "3.96",
+    graduationDate: "Graduated May 2022",
+    projects: [
+      "Cross-lingual definition modeling without bilingual corpora",
+      "Farsi NLP Tools",
+    ],
+  }
+);
 
 const aei = createJobExperience(
   "Aei",
@@ -360,10 +381,7 @@ const shelfA = document.getElementById("shelfA");
 const shelfASections = shelfA.querySelectorAll(".shelf-section");
 const shelfASection0 = shelfASections[0].querySelector(".content-section");
 
-shelfASection0.appendChild(bookBachelors);
-shelfASection0.appendChild(bookMasters);
-shelfASection0.appendChild(modalBachelors);
-shelfASection0.appendChild(modalMasters);
+addItems(shelfASection0, [bachelors, masters]);
 
 // Shelf B
 const shelfB = document.getElementById("shelfB");
