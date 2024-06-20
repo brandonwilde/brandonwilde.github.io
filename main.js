@@ -126,7 +126,6 @@ function createJobExperience(
   };
 
   if (job) {
-    console.log("Adding job modal");
     const template = document.getElementById("jobModalTemplate");
     const fragment = template.content.cloneNode(true);
     const modal = fragment.querySelector(".modal");
@@ -155,11 +154,8 @@ function createJobExperience(
 
     attachModal(bookBlock, modal);
     jobExperience.modal = modal;
-  } else {
-    console.log("No job modal");
   }
 
-  console.log("jobExperience", jobExperience);
   return jobExperience;
 }
 
