@@ -100,37 +100,58 @@ function createEducationModal(
   return modal;
 }
 
-function createJobModal(
+function createJobExperience(
   id,
-  { logoSrc, logoAlt, company, position, startDate, endDate, accomplishments }
+  book = { content: "", width: 40, height: 200, color: colors.red },
+  job // = { company: "", position: "", startDate: "", endDate: "", accomplishments: [] }
 ) {
-  const template = document.getElementById("jobModalTemplate");
-  const fragment = template.content.cloneNode(true);
-  const modal = fragment.querySelector(".modal");
-  modal.id = id;
-  closeModalOnX(modal);
+  const bookBlock = createBlock(`book${id}`, {
+    width: book.width,
+    height: book.height,
+    color: book.color,
+    content: book.content,
+  });
 
-  // modal.querySelector(".company-logo").src = logoSrc;
-  // modal.querySelector(".company-logo").alt = logoAlt;
-  modal.querySelector(".job-position").textContent = position;
+  const jobExperience = {
+    block: bookBlock,
+  };
 
-  const companyTextNode = document.createTextNode(" " + company);
-  modal.querySelector(".modal-info strong").appendChild(companyTextNode);
+  if (job) {
+    console.log("Adding job modal");
+    const template = document.getElementById("jobModalTemplate");
+    const fragment = template.content.cloneNode(true);
+    const modal = fragment.querySelector(".modal");
+    modal.id = `modal${id}`;
+    closeModalOnX(modal);
 
-  const DateTextNode = document.createTextNode(` ${startDate} – ${endDate}`);
-  modal.querySelector(".job-dates").appendChild(DateTextNode);
+    modal.querySelector(".job-position").textContent = job.position;
 
-  const ul = modal.querySelector(".job-accomplishments");
+    const companyTextNode = document.createTextNode(" " + job.company);
+    modal.querySelector(".modal-info strong").appendChild(companyTextNode);
 
-  if (accomplishments !== undefined) {
-    accomplishments.forEach((accomplishment) => {
-      const li = document.createElement("li");
-      li.textContent = accomplishment;
-      ul.appendChild(li);
-    });
+    const DateTextNode = document.createTextNode(
+      ` ${job.startDate} – ${job.endDate}`
+    );
+    modal.querySelector(".job-dates").appendChild(DateTextNode);
+
+    const ul = modal.querySelector(".job-accomplishments");
+
+    if (job.accomplishments !== undefined) {
+      job.accomplishments.forEach((accomplishment) => {
+        const li = document.createElement("li");
+        li.textContent = accomplishment;
+        ul.appendChild(li);
+      });
+    }
+
+    attachModal(bookBlock, modal);
+    jobExperience.modal = modal;
+  } else {
+    console.log("No job modal");
   }
 
-  return modal;
+  console.log("jobExperience", jobExperience);
+  return jobExperience;
 }
 
 function createBusinessCardModal() {
@@ -154,6 +175,15 @@ function createBusinessCardModal() {
   modal.querySelector("#github").href = "https://www.github.com/brandonwilde";
 
   return modal;
+}
+
+function addItems(shelf, items) {
+  items.forEach((item) => {
+    shelf.appendChild(item.block);
+    if (item.modal) {
+      shelf.appendChild(item.modal);
+    }
+  });
 }
 
 const bookBachelors = createBlock("bookBachelors", {
@@ -219,30 +249,42 @@ const bookMsu2 = createBlock("bookMsu2", {
   content: "MSU",
 });
 
-const bookInventives = createBlock("bookInventives", {
-  width: 80,
-  height: 250,
-  color: colors.yellowGreen,
-  content: "Inventives",
-});
+const inventives = createJobExperience(
+  "Inventives",
+  {
+    width: 80,
+    height: 250,
+    color: colors.yellowGreen,
+    content: "Inventives",
+  }
+  // {
+  //   company: "Inventives",
+  //   position: "Software Engineer",
+  //   startDate: "May 2022",
+  //   endDate: "January 2024",
+  //   accomplishments: [],
+  // }
+);
 
-const bookSyera = createBlock("bookSyera", {
-  width: 60,
-  height: 180,
-  color: colors.red,
-  content: "Syera",
-});
-const modalSyera = createJobModal("modalSyera", {
-  company: "Syera",
-  position: "Software Engineer",
-  startDate: "January 2024",
-  endDate: "Present",
-  accomplishments: [
-    "Architecting and developing core software, designing and building intelligent document processing and data extraction systems using ML and NLP techniques.",
-    "Engineering scalable, cloud-based infrastructure to transform legal case documents into intuitive visual timelines, enabling rapid evidence discovery.",
-  ],
-});
-attachModal(bookSyera, modalSyera);
+const syera = createJobExperience(
+  "Syera",
+  {
+    width: 60,
+    height: 180,
+    color: colors.red,
+    content: "Syera",
+  },
+  {
+    company: "Syera",
+    position: "Software Engineer",
+    startDate: "January 2024",
+    endDate: "Present",
+    accomplishments: [
+      "Architecting and developing core software, designing and building intelligent document processing and data extraction systems using ML and NLP techniques.",
+      "Engineering scalable, cloud-based infrastructure to transform legal case documents into intuitive visual timelines, enabling rapid evidence discovery.",
+    ],
+  }
+);
 
 const businessCards = createBlock("businessCards", {
   width: 100,
@@ -290,9 +332,8 @@ shelfCSection1.appendChild(
 shelfCSection2.appendChild(bookAei);
 shelfCSection2.appendChild(bookMsu1);
 shelfCSection2.appendChild(bookMsu2);
-shelfCSection2.appendChild(bookInventives);
-shelfCSection2.appendChild(bookSyera);
-shelfCSection2.appendChild(modalSyera);
+// shelfCSection2.appendChild(bookInventives);
+addItems(shelfCSection2, [inventives, syera]);
 
 shelfCSection3.appendChild(businessCards);
 shelfCSection3.appendChild(modalBusinessCards);
