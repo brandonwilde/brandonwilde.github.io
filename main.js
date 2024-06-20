@@ -68,12 +68,7 @@ function createEducation(
   book = { content: "", width: 40, height: 200, color: colors.red },
   edu // = { logoSrc, logoAlt, degree, university, gpa, graduationDate, projects: [] }
 ) {
-  const bookBlock = createBlock(`book${id}`, {
-    width: book.width,
-    height: book.height,
-    color: book.color,
-    content: book.content,
-  });
+  const bookBlock = createBlock(`book${id}`, book);
 
   const degree = {
     block: bookBlock,
@@ -124,12 +119,7 @@ function createJobExperience(
   book = { content: "", width: 40, height: 200, color: colors.red },
   job // = { company: "", position: "", startDate: "", endDate: "", accomplishments: [] }
 ) {
-  const bookBlock = createBlock(`book${id}`, {
-    width: book.width,
-    height: book.height,
-    color: book.color,
-    content: book.content,
-  });
+  const bookBlock = createBlock(`book${id}`, book);
 
   const jobExperience = {
     block: bookBlock,
@@ -173,27 +163,39 @@ function createJobExperience(
   return jobExperience;
 }
 
-function createBusinessCardModal() {
-  const template = document.getElementById("businessCardModalTemplate");
-  const fragment = template.content.cloneNode(true);
-  const modal = fragment.querySelector(".modal");
-  modal.id = "modalBusinessCards";
-  closeModalOnX(modal);
+function createBusinessCard(
+  id,
+  cardBox = { content: "", width: 40, height: 200, color: colors.red },
+  card // = { name: "", jobTitle1: "", jobTitle2: "", personalLogoSrc: "", emailSrc: "", linkedin: "", github: "" }
+) {
+  const cardBlock = createBlock(`book${id}`, cardBox);
 
-  modal.querySelector("#name").textContent = "Brandon Wilde";
-  modal.querySelector("#jobTitle1").textContent = "Machine Learning Engineer";
-  modal.querySelector("#jobTitle2").textContent = "Chemical Engineer";
-  modal.querySelector("#personalLogo").src = "assets/images/personal-logo.png";
-  modal.querySelector("#email").src = "assets/images/email.png";
-  modal.querySelector("#linkedin").textContent =
-    "https://www.linkedin.com/in/brandon-wilde3/";
-  modal.querySelector("#linkedin").href =
-    "https://www.linkedin.com/in/brandon-wilde3/";
-  modal.querySelector("#github").textContent =
-    "https://www.github.com/brandonwilde";
-  modal.querySelector("#github").href = "https://www.github.com/brandonwilde";
+  const businessCard = {
+    block: cardBlock,
+  };
 
-  return modal;
+  if (card) {
+    const template = document.getElementById("businessCardModalTemplate");
+    const fragment = template.content.cloneNode(true);
+    const modal = fragment.querySelector(".modal");
+    modal.id = `modal${id}`;
+    closeModalOnX(modal);
+
+    modal.querySelector("#name").textContent = card.name;
+    modal.querySelector("#jobTitle1").textContent = card.jobTitle1;
+    modal.querySelector("#jobTitle2").textContent = card.jobTitle2;
+    modal.querySelector("#personalLogo").src = card.personalLogoSrc;
+    modal.querySelector("#email").src = card.emailSrc;
+    modal.querySelector("#linkedin").textContent = card.linkedin;
+    modal.querySelector("#linkedin").href = card.linkedin;
+    modal.querySelector("#github").textContent = card.github;
+    modal.querySelector("#github").href = card.github;
+
+    attachModal(cardBlock, modal);
+    businessCard.modal = modal;
+  }
+
+  return businessCard;
 }
 
 function addItems(shelf, items) {
@@ -269,13 +271,6 @@ const aei = createJobExperience(
     ],
   }
 );
-
-const bookMsu1 = createBlock("bookMsu1", {
-  width: 50,
-  height: 200,
-  color: colors.red,
-  content: "MSU",
-});
 
 const msu1 = createJobExperience(
   "Msu1",
@@ -366,15 +361,24 @@ const syera = createJobExperience(
   }
 );
 
-const businessCards = createBlock("businessCards", {
-  width: 100,
-  height: 60,
-  color: colors.white,
-  content: "Contact Info",
-});
-
-const modalBusinessCards = createBusinessCardModal();
-attachModal(businessCards, modalBusinessCards);
+const businessCards = createBusinessCard(
+  "businessCards",
+  {
+    width: 100,
+    height: 60,
+    color: colors.white,
+    content: "Contact Info",
+  },
+  {
+    name: "Brandon Wilde",
+    jobTitle1: "Machine Learning Engineer",
+    jobTitle2: "Chemical Engineer",
+    personalLogoSrc: "assets/images/personal-logo.png",
+    emailSrc: "assets/images/email.png",
+    linkedin: "https://www.linkedin.com/in/brandon-wilde3/",
+    github: "https://www.github.com/brandonwilde",
+  }
+);
 
 // Shelf A
 const shelfA = document.getElementById("shelfA");
@@ -407,9 +411,7 @@ shelfCSection1.appendChild(
 );
 
 addItems(shelfCSection2, [aei, msu1, msu2, inventives, syera]);
-
-shelfCSection3.appendChild(businessCards);
-shelfCSection3.appendChild(modalBusinessCards);
+addItems(shelfCSection3, [businessCards]);
 
 // Close modals when clicking outside the modal content
 window.onclick = function (event) {
