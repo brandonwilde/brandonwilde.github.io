@@ -2,6 +2,7 @@ const colors = {
   red: [98, 55, 55],
   lightRed: [162, 80, 74],
   brightRed: [89, 14, 23],
+  tan: [140, 123, 109],
   brown: [72, 56, 50],
   yellow: [162, 128, 27],
   yellowGreen: [106, 99, 69],
@@ -199,6 +200,40 @@ function createBusinessCard(
   return businessCard;
 }
 
+function createBookReviewsBlock(
+  id,
+  book = { content: "", width: 40, height: 200, color: colors.red },
+  widgetSettings = { width: 400, height: 400, numUpdates: 100 }
+) {
+  const bookReviewsBlock = createBlock(`book${id}`, book);
+
+  const template = document.getElementById("bookReviewsModalTemplate");
+  const fragment = template.content.cloneNode(true);
+  const modal = fragment.querySelector(".modal-container");
+  modal.id = `modal${id}`;
+  closeModalOnX(modal);
+
+  widgetSource = `https://www.goodreads.com/widgets/user_update_widget?user=7208433`;
+  widgetSource += `&num_updates=${widgetSettings.numUpdates}`;
+  widgetSource += `&width=${widgetSettings.width}`;
+  // Note: The height parameter has no effect in the Goodreads widget
+
+  modal.querySelector("#the_iframe").src = widgetSource;
+  modal.querySelector(
+    "#gr_updates_widget"
+  ).style.width = `${widgetSettings.width}px`;
+  modal.querySelector(
+    "#gr_updates_widget"
+  ).style.height = `${widgetSettings.height}px`;
+  modal.querySelector("#the_iframe").width = widgetSettings.width - 2;
+  modal.querySelector("#the_iframe").height = widgetSettings.height;
+
+  attachModal(bookReviewsBlock.block, modal);
+  bookReviewsBlock.modal = modal;
+
+  return bookReviewsBlock;
+}
+
 const bachelors = createEducation(
   "Bachelors",
   {
@@ -372,6 +407,13 @@ const businessCards = createBusinessCard(
   }
 );
 
+const bookReviews = createBookReviewsBlock("BookReviews", {
+  width: 70,
+  height: 240,
+  color: colors.tan,
+  content: "Book Reviews",
+});
+
 function addItems(shelf, section, items) {
   const elemShelf = document.getElementById(`shelf${shelf}`);
   const elemSections = elemShelf.querySelectorAll(".shelf-section");
@@ -413,8 +455,9 @@ addItems("B", 2, [
   createBlock("bookB2b", { width: 30, color: colors.gray }),
 ]);
 addItems("B", 3, [
-  createBlock("bookB3a", { height: 240, color: colors.gray, content: "ϕ" }),
-  createBlock("bookB3b", { color: colors.yellowGreen, content: "Δ" }),
+  bookReviews,
+  createBlock("bookB3b", { height: 230, color: colors.gray, content: "ϕ" }),
+  createBlock("bookB3c", { color: colors.yellowGreen, content: "Δ" }),
 ]);
 
 addItems("C", 1, [createBlock("bookC1a", { width: 27, color: colors.blue })]);

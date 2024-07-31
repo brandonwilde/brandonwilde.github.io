@@ -228,6 +228,7 @@ html {
   color: #333;
   font-family: Arial, sans-serif;
   display: flex;
+  position: relative;
 }
 
 .job-modal {
@@ -273,7 +274,7 @@ html {
 
 .modal-info {
   flex: 2; /* Takes 2/3 the space */
-  padding-left: 20px;
+  padding-left: 30px;
   padding-right: 20px;
   display: flex;
   flex-direction: column;
@@ -305,6 +306,13 @@ html {
 
 .graduation-date {
   margin-top: 10px;
+}
+
+.book-reviews-modal {
+  display: flex;
+  justify-content: center;
+  width: 35%;
+  padding: 30px;
 }
 
 .business-card-modal {
@@ -382,6 +390,12 @@ html {
 #email {
   height: 1em;
   vertical-align: sub;
+}
+
+.close-div {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
 .close {
