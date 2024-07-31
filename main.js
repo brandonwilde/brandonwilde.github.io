@@ -82,7 +82,7 @@ function createEducation(
   if (edu) {
     const template = document.getElementById("educationModalTemplate");
     const fragment = template.content.cloneNode(true);
-    const modal = fragment.querySelector(".modal");
+    const modal = fragment.querySelector(".modal-container");
     modal.id = `modal${id}`;
     closeModalOnX(modal);
 
@@ -133,7 +133,7 @@ function createJobExperience(
   if (job) {
     const template = document.getElementById("jobModalTemplate");
     const fragment = template.content.cloneNode(true);
-    const modal = fragment.querySelector(".modal");
+    const modal = fragment.querySelector(".modal-container");
     modal.id = `modal${id}`;
     closeModalOnX(modal);
 
@@ -178,7 +178,7 @@ function createBusinessCard(
   if (card) {
     const template = document.getElementById("businessCardModalTemplate");
     const fragment = template.content.cloneNode(true);
-    const modal = fragment.querySelector(".modal");
+    const modal = fragment.querySelector(".modal-container");
     modal.id = `modal${id}`;
     closeModalOnX(modal);
 
@@ -354,7 +354,7 @@ const syera = createJobExperience(
 );
 
 const businessCards = createBusinessCard(
-  "businessCards",
+  "BusinessCards",
   {
     width: 100,
     height: 60,
@@ -423,7 +423,7 @@ addItems("C", 3, [businessCards]);
 
 // Close modals when clicking outside the modal content
 window.onclick = function (event) {
-  if (event.target.classList.contains("modal")) {
+  if (event.target.classList.contains("modal-container")) {
     event.target.classList.remove("modal-active");
   }
 };

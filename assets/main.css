@@ -193,7 +193,7 @@ html {
   background-color: darkgray;
 }
 
-.modal {
+.modal-container {
   visibility: hidden;
   opacity: 0;
   position: fixed;
@@ -309,9 +309,8 @@ html {
 
 .business-card-modal {
   display: flex;
-  flex-direction: column;
   background: rgb(171, 171, 171);
-  padding: 20px;
+  padding: 30px;
   border: 1px solid #8f8f8f;
   border-radius: 8px;
   max-width: 450px;
@@ -327,12 +326,11 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0px 20px 0px;
+  padding: 20px 0px 20px 0px;
 }
 
 .header .left {
   flex: 0 0 auto;
-  padding-left: 20px;
 }
 
 .header .left h1 {
@@ -361,7 +359,7 @@ html {
 }
 
 .footer {
-  padding: 10px 0 0 20px;
+  padding: 10px 0 0 0px;
   font-size: 14px;
   color: #333;
   border-top: 1px solid #8f8f8f;
@@ -387,6 +385,7 @@ html {
 }
 
 .close {
+  flex: 0;
   color: #333;
   float: right;
   font-size: 28px;
