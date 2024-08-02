@@ -19,7 +19,6 @@ function parseGrBookInfo(bookInfoStr) {
   const doc = parser.parseFromString(bookInfoStr, "text/html");
 
   const img = doc.querySelector("img");
-  console.log(img.src);
   const titleAndAuthor = img.title;
   const bookTitle = doc.querySelector(".bookTitle").textContent;
   const authorName = doc.querySelector(".authorName").textContent;
@@ -50,7 +49,6 @@ function strip(str, chars) {
 
 function addRecentReads(items, numUpdates) {
   let recentReads = [];
-  console.log("Number of items:", items.length);
   const mostRecentItems = items.slice(0, numUpdates);
   mostRecentItems.forEach((item, index) => {
     const bookInfo = parseGrBookInfo(item.content);
@@ -66,7 +64,6 @@ function addRecentReads(items, numUpdates) {
       })
     );
   });
-  console.log("Recent Reads:", recentReads);
 
   addItems("B", 3, [bookReviews, ...recentReads]);
   setPerspective();
@@ -84,7 +81,6 @@ function hashString(str) {
 
 function getBookProps(title) {
   const hash = Math.abs(hashString(title));
-  console.log("Hash:", hash);
   let width = bookWidths[hash % bookWidths.length];
   const height = bookHeights[hash % bookHeights.length];
   colorsList = Object.values(colors);
@@ -104,7 +100,6 @@ function getBookProps(title) {
   if (textWidth > width - 4) {
     width = textWidth + 4;
   }
-  console.log({ title, width, height, color });
   return { width, height, color };
 }
 

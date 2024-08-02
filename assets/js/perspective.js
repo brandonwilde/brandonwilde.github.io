@@ -69,7 +69,7 @@ function setFaceDimensions(book, depth) {
   bottomFace.style.transform = `rotateX(90deg) translateY(-${depth}px)`;
 }
 
-function togglebookFaces(book, centerX, centerY) {
+function toggleBookFaces(book, centerX, centerY) {
   const bookRect = book.getBoundingClientRect();
   const bookCenterX = bookRect.left + bookRect.width / 2;
   const bookCenterY = bookRect.top + bookRect.height / 2;
@@ -95,7 +95,7 @@ function setPerspective() {
     book.style.transform = spinePerspective.transform;
     book.style.zIndex = spinePerspective.zIndex;
     setFaceDimensions(book, 200); // Give the book a depth of 200px
-    togglebookFaces(book, centerX, centerY);
+    toggleBookFaces(book, centerX, centerY);
   });
 }
 
