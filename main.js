@@ -1,19 +1,22 @@
 const colors = {
   red: [98, 55, 55],
-  lightRed: [162, 80, 74],
-  brightRed: [89, 14, 23],
+  // lightRed: [162, 80, 74],
+  // brightRed: [89, 14, 23],
   tan: [140, 123, 109],
   brown: [72, 56, 50],
   yellow: [162, 128, 27],
   yellowGreen: [106, 99, 69],
   green: [77, 98, 89],
-  aqua: [68, 97, 111],
+  // aqua: [68, 97, 111],
   blue: [74, 104, 162],
   purple: [80, 68, 111],
   white: [147, 147, 147],
   gray: [115, 115, 115],
   black: [64, 64, 64],
 };
+
+const bookHeights = [185, 191, 194, 200, 203, 205, 211, 219, 230, 250];
+const bookWidths = [25, 31, 35, 38, 42, 48, 58, 66];
 
 function attachModal(block, modal) {
   block.classList.add("has-modal");
@@ -31,7 +34,13 @@ function closeModalOnX(modal) {
 
 function createBlock(
   id,
-  { content = "", width = 40, height = 200, color = colors.red } = {}
+  {
+    content = "",
+    width = 40,
+    height = 200,
+    color = colors.red,
+    verticalText = false,
+  } = {}
 ) {
   const block = document.createElement("div");
   block.id = id;
@@ -43,6 +52,10 @@ function createBlock(
   const dimColorRgb = `rgb(${dimColor.join(",")})`;
 
   const span = document.createElement("span");
+
+  if (verticalText) {
+    span.style.writingMode = "vertical-rl";
+  }
 
   const parts = content.split("<br />");
   for (let i = 0; i < parts.length; i++) {
@@ -65,6 +78,20 @@ function createBlock(
     }
     block.appendChild(div);
   }
+
+  block.addEventListener("mouseover", () => {
+    block.classList.add("hovered");
+    if (block.classList.contains("has-modal")) {
+      updatePosition(block);
+    }
+  });
+
+  block.addEventListener("mouseout", () => {
+    block.classList.remove("hovered");
+    if (block.classList.contains("has-modal")) {
+      updatePosition(block);
+    }
+  });
 
   return { block: block };
 }
@@ -200,10 +227,120 @@ function createBusinessCard(
   return businessCard;
 }
 
+async function fetchGoodreadsRSS() {
+  const rss2jsonUrl = "https://api.rss2json.com/v1/api.json?rss_url=";
+  const targetUrl = encodeURIComponent(
+    "https://www.goodreads.com/user/updates_rss/7208433"
+  );
+
+  try {
+    const response = await fetch(rss2jsonUrl + targetUrl);
+    const data = await response.json();
+    return data.items;
+  } catch (error) {
+    console.error("Error fetching the RSS feed:", error);
+    return [];
+  }
+}
+
+function parseGrBookInfo(bookInfoStr) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(bookInfoStr, "text/html");
+
+  const img = doc.querySelector("img");
+  console.log(img.src);
+  const titleAndAuthor = img.title;
+  const bookTitle = doc.querySelector(".bookTitle").textContent;
+  const authorName = doc.querySelector(".authorName").textContent;
+  const rating = bookInfoStr.match(/gave (\d+) star/)[1];
+
+  reversedContent = reverseString(bookInfoStr);
+  const reviewMatch = reversedContent.match(/^([\s\S]*?)>a/);
+  const review = strip(reverseString(reviewMatch[1]), "(<br>) \n");
+
+  return {
+    imgSrc: img ? img.src : "",
+    titleAndAuthor,
+    bookTitle,
+    authorName,
+    rating: parseInt(rating, 10),
+    review: review,
+  };
+}
+
+function reverseString(str) {
+  return str.split("").reverse().join("");
+}
+
+function strip(str, chars) {
+  const regex = new RegExp(`^[${chars}]+|[${chars}]+$`, "g");
+  return str.replace(regex, "");
+}
+
+function addRecentReads(items, numUpdates) {
+  let recentReads = [];
+  console.log("Number of items:", items.length);
+  const mostRecentItems = items.slice(0, numUpdates);
+  mostRecentItems.forEach((item, index) => {
+    const bookInfo = parseGrBookInfo(item.content);
+    const bookProps = getBookProps(bookInfo.titleAndAuthor);
+
+    recentReads.push(
+      createBlock(`bookB3gr${index}`, {
+        width: bookProps.width,
+        height: bookProps.height,
+        color: bookProps.color,
+        content: bookInfo.titleAndAuthor,
+        verticalText: true,
+      })
+    );
+  });
+  console.log("Recent Reads:", recentReads);
+
+  addItems("B", 3, [bookReviews, ...recentReads]);
+  setPerspective();
+}
+
+function hashString(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+}
+
+function getBookProps(title) {
+  const hash = Math.abs(hashString(title));
+  console.log("Hash:", hash);
+  let width = bookWidths[hash % bookWidths.length];
+  const height = bookHeights[hash % bookHeights.length];
+  colorsList = Object.values(colors);
+  const color = colorsList[hash % colorsList.length];
+
+  const virtualBook = document.createElement("div");
+  virtualBook.style.width = `${width}px`;
+  virtualBook.style.height = `${height}px`;
+  document.body.appendChild(virtualBook);
+  const virtualText = document.createElement("span");
+  virtualText.style.writingMode = "vertical-rl";
+  virtualText.textContent = title;
+  virtualBook.appendChild(virtualText);
+  const textWidth = virtualText.offsetWidth;
+  document.body.removeChild(virtualBook);
+
+  if (textWidth > width - 4) {
+    width = textWidth + 4;
+  }
+  console.log({ title, width, height, color });
+  return { width, height, color };
+}
+
 function createBookReviewsBlock(
   id,
   book = { content: "", width: 40, height: 200, color: colors.red },
-  widgetSettings = { width: 400, height: 400, numUpdates: 100 }
+  widgetSettings = { width: 400, height: 400, numUpdates: 10 }
 ) {
   const bookReviewsBlock = createBlock(`book${id}`, book);
 
@@ -454,11 +591,14 @@ addItems("B", 2, [
   createBlock("bookB2a", { height: 180, color: colors.yellow }),
   createBlock("bookB2b", { width: 30, color: colors.gray }),
 ]);
-addItems("B", 3, [
-  bookReviews,
-  createBlock("bookB3b", { height: 230, color: colors.gray, content: "ϕ" }),
-  createBlock("bookB3c", { color: colors.yellowGreen, content: "Δ" }),
-]);
+// addItems("B", 3, [
+//   bookReviews,
+//   createBlock("bookB3b", { height: 230, color: colors.gray, content: "ϕ" }),
+//   createBlock("bookB3c", { color: colors.yellowGreen, content: "Δ" }),
+// ]);
+fetchGoodreadsRSS().then((items) => {
+  addRecentReads(items, (numUpdates = 7));
+});
 
 addItems("C", 1, [createBlock("bookC1a", { width: 27, color: colors.blue })]);
 addItems("C", 2, [aei, msu1, msu2, inventives, syera]);

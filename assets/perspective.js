@@ -1,44 +1,22 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const books = document.querySelectorAll(".book");
+function updatePosition(book) {
+  const viewportWidth = window.innerWidth;
+  const bookRect = book.getBoundingClientRect();
+  const bookCenterX = bookRect.left + bookRect.width / 2;
+  const distanceFromCenter = bookCenterX - viewportWidth / 2;
+  const rotationValue = (distanceFromCenter / viewportWidth) * 7;
+  const scale = 1 + 0.5 * (0.4 - Math.abs(rotationValue) / 12);
 
-  books.forEach((book, index) => {
-    book.addEventListener("mouseover", () => {
-      book.classList.add("hovered");
-      if (book.classList.contains("has-modal")) {
-        updatePosition(book);
-      }
-    });
-
-    book.addEventListener("mouseout", () => {
-      book.classList.remove("hovered");
-      if (book.classList.contains("has-modal")) {
-        updatePosition(book);
-      }
-    });
-
-    updatePosition(book);
-  });
-
-  function updatePosition(book) {
-    const viewportWidth = window.innerWidth;
-    const bookRect = book.getBoundingClientRect();
-    const bookCenterX = bookRect.left + bookRect.width / 2;
-    const distanceFromCenter = bookCenterX - viewportWidth / 2;
-    const rotationValue = (distanceFromCenter / viewportWidth) * 7;
-    const scale = 1 + 0.5 * (0.4 - Math.abs(rotationValue) / 12);
-
-    const spinePerspective = setSpinePerspective(book);
-    if (book.classList.contains("hovered")) {
-      book.style.transform =
-        spinePerspective.transform +
-        `translateX(${0}px) translateY(0px) translateZ(100px)`;
-      book.style.zIndex = spinePerspective.zIndex;
-    } else {
-      book.style.transform = spinePerspective.transform;
-      book.style.zIndex = spinePerspective.zIndex;
-    }
+  const spinePerspective = setSpinePerspective(book);
+  if (book.classList.contains("hovered")) {
+    book.style.transform =
+      spinePerspective.transform +
+      `translateX(${0}px) translateY(0px) translateZ(100px)`;
+    book.style.zIndex = spinePerspective.zIndex;
+  } else {
+    book.style.transform = spinePerspective.transform;
+    book.style.zIndex = spinePerspective.zIndex;
   }
-});
+}
 
 // Function to calculate the 3D transformation for a book based on its position
 function setSpinePerspective(book) {
