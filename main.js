@@ -218,13 +218,14 @@ addItems("B", 2, [
   createBlock("bookB2a", { height: 180, color: colors.yellow }),
   createBlock("bookB2b", { width: 30, color: colors.gray }),
 ]);
-// addItems("B", 3, [
-//   bookReviews,
-//   createBlock("bookB3b", { height: 230, color: colors.gray, content: "ϕ" }),
-//   createBlock("bookB3c", { color: colors.yellowGreen, content: "Δ" }),
-// ]);
+addItems("B", 3, [
+  bookReviews,
+  //   createBlock("bookB3b", { height: 230, color: colors.gray, content: "ϕ" }),
+  //   createBlock("bookB3c", { color: colors.yellowGreen, content: "Δ" }),
+]);
 fetchGoodreadsRSS().then((items) => {
-  addRecentReads(items, (numUpdates = 7));
+  addItems("B", 3, createRecentReads(items, (numUpdates = 7)));
+  setPerspective();
 });
 
 addItems("C", 1, [createBlock("bookC1a", { width: 27, color: colors.blue })]);

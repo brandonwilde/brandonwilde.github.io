@@ -47,7 +47,7 @@ function strip(str, chars) {
   return str.replace(regex, "");
 }
 
-function addRecentReads(items, numUpdates) {
+function createRecentReads(items, numUpdates) {
   let recentReads = [];
   const mostRecentItems = items.slice(0, numUpdates);
   mostRecentItems.forEach((item, index) => {
@@ -65,8 +65,7 @@ function addRecentReads(items, numUpdates) {
     );
   });
 
-  addItems("B", 3, [bookReviews, ...recentReads]);
-  setPerspective();
+  return recentReads;
 }
 
 function hashString(str) {
