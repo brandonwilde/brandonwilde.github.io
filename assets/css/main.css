@@ -96,6 +96,11 @@ html {
   position: relative;
 }
 
+.recent-reads-shelf {
+  width: 530px;
+  flex: 0 0 auto;
+}
+
 .board-section {
   position: absolute;
   bottom: 0;
