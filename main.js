@@ -164,7 +164,7 @@ const businessCards = createBusinessCard(
     name: "Brandon Wilde",
     jobTitle1: "Machine Learning Engineer",
     jobTitle2: "Chemical Engineer",
-    personalLogoSrc: "assets/images/btw_purple_grad.png",
+    personalLogoSrc: "assets/images/wilde_ribbon_purple_sm_8.png",
     emailSrc: "assets/images/email.png",
     linkedin: "https://www.linkedin.com/in/brandon-wilde3/",
     github: "https://www.github.com/brandonwilde",
