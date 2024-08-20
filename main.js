@@ -43,6 +43,29 @@ const masters = createEducation(
   }
 );
 
+const montco = createJobExperience(
+  "Montco",
+  {
+    width: 80,
+    height: 218,
+    color: colors.purple,
+    content: "Montco Hunger Solutions",
+  },
+  {
+    company: "Montco Hunger Solutions (a subsidiary of the Share Food Program)",
+    position: "Program Assistant",
+    startDate: "June 2018",
+    endDate: "September 2018",
+    accomplishments: [
+      "Managed a county-wide distribution of supplemental food to disadvantaged populations, ensuring quality control and timely deliveries.",
+      "Tracked invoices, scheduled food distribution, and handled box truck deliveries.",
+      "Provided training and mentoring to the food cupboard and shelter staff, also monitoring adherence to procedural standards.",
+      "Administered contracts, facilitated client enrollment, managed data collection, and maintained accurate records.",
+      "Assisted the development of promotional materials to support program engagement.",
+    ],
+  }
+);
+
 const aei = createJobExperience(
   "Aei",
   {
@@ -229,7 +252,7 @@ fetchGoodreadsRSS().then((items) => {
 });
 
 addItems("C", 1, [createBlock("bookC1a", { width: 27, color: colors.blue })]);
-addItems("C", 2, [aei, msu1, msu2, inventives, syera]);
+addItems("C", 2, [montco, aei, msu1, msu2, inventives, syera]);
 addItems("C", 3, [businessCards]);
 
 // Close modals when clicking outside the modal content
