@@ -43,10 +43,34 @@ const masters = createEducation(
   }
 );
 
+const translate = createJobExperience(
+  "Translate",
+  {
+    width: 80,
+    height: 200,
+    color: colors.yellow,
+    content: "Freelance Translation",
+  },
+  {
+    company: "Self-Employed",
+    position: "Freelance German-English Translator",
+    startDate: "December 2016",
+    endDate: "June 2018",
+    accomplishments: [
+      "Provided an array of services including audio translation, transcription, and software localization, as well as translating texts in the marketing, legal, and STEM disciplines. Projects included:",
+      "Localized a CAD software interface, ensuring user-friendly and culturally appropriate language.",
+      "Translated a body of legal documents for a county victim/witness assistance program.",
+      "Transcribed and translated sensitive German audio recordings for a legal case.",
+      "Provided German rewriting services for a marketing firm.",
+      "Rendered translation and editing services for an online media group.",
+    ],
+  }
+);
+
 const montco = createJobExperience(
   "Montco",
   {
-    width: 80,
+    width: 77,
     height: 218,
     color: colors.purple,
     content: "Montco Hunger Solutions",
@@ -69,7 +93,7 @@ const montco = createJobExperience(
 const aei = createJobExperience(
   "Aei",
   {
-    width: 85,
+    width: 65,
     color: colors.gray,
     content: "AEI",
   },
@@ -252,7 +276,7 @@ fetchGoodreadsRSS().then((items) => {
 });
 
 addItems("C", 1, [createBlock("bookC1a", { width: 27, color: colors.blue })]);
-addItems("C", 2, [montco, aei, msu1, msu2, inventives, syera]);
+addItems("C", 2, [translate, montco, aei, msu1, msu2, inventives, syera]);
 addItems("C", 3, [businessCards]);
 
 // Close modals when clicking outside the modal content
