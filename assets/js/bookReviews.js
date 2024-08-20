@@ -47,10 +47,11 @@ function strip(str, chars) {
   return str.replace(regex, "");
 }
 
-function createRecentReads(items, numUpdates) {
+function createRecentReads(updates, numUpdates) {
   let recentReads = [];
-  const mostRecentItems = items.slice(0, numUpdates);
-  mostRecentItems.forEach((item, index) => {
+  const reads = updates.filter((update) => update.guid.startsWith("Review"));
+  const mostRecentReads = reads.slice(0, numUpdates);
+  mostRecentReads.forEach((item, index) => {
     const bookInfo = parseGrBookInfo(item.content);
     const bookProps = getBookProps(bookInfo.titleAndAuthor);
 
