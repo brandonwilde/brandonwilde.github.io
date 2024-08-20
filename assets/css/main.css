@@ -153,10 +153,6 @@ html {
   align-items: flex-end;
 }
 
-.has-modal {
-  cursor: pointer;
-}
-
 .book {
   height: 200px;
   background: #a2504a;
@@ -170,6 +166,7 @@ html {
   text-align: center;
   width: 40px;
   transform-style: preserve-3d;
+  cursor: default;
 }
 
 .book-face {
@@ -198,6 +195,10 @@ html {
   transform-origin: top;
   top: 100%;
   background-color: darkgray;
+}
+
+.has-modal {
+  cursor: pointer;
 }
 
 .modal-container {
