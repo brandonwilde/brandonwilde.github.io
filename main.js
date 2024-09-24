@@ -225,6 +225,13 @@ const bookReviews = createBookReviewsBlock("BookReviews", {
   content: "Book Reviews",
 });
 
+const blog = createBlog("Blog", {
+  content: "Blog",
+  width: 300,
+  height: 30,
+  color: colors.white,
+});
+
 function addItems(shelf, section, items) {
   const elemShelf = document.getElementById(`shelf${shelf}`);
   const elemSections = elemShelf.querySelectorAll(".shelf-section");
@@ -274,7 +281,7 @@ fetchGoodreadsRSS().then((items) => {
   addItems("B", 3, createRecentReads(items, (numUpdates = 7)));
   setPerspective();
 });
-
+addItems("C", 0, [blog]);
 addItems("C", 1, [createBlock("bookC1a", { width: 27, color: colors.blue })]);
 addItems("C", 2, [translate, montco, aei, msu1, msu2, inventives, syera]);
 addItems("C", 3, [businessCards]);
