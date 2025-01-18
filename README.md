@@ -1,3 +1,1 @@
-My personal webpage. Here, I'll share a little about me and what I've been up to.
-
-Currently redesigning and revamping!
+My personal webpage. Here, I'll share a little about my background and what I've been up to.

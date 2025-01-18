@@ -208,8 +208,8 @@ const businessCards = createBusinessCard(
     content: "Contact Info",
   },
   {
-    name: "Brandon Wilde",
-    jobTitle1: "Machine Learning Engineer",
+    name: "Brandon T Wilde",
+    jobTitle1: "AI Engineer",
     jobTitle2: "Chemical Engineer",
     personalLogoSrc: "assets/images/wilde_ribbon_purple_sm_8.png",
     emailSrc: "assets/images/email.png",
