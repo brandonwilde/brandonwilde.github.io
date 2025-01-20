@@ -1,3 +1,153 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+/* Modal styles */
+.modal-container {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-container.modal-active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 80%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-div {
+    text-align: right;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Education modal specific styles */
+.modal-image {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.university-logo {
+    max-width: 200px;
+    height: auto;
+}
+
+.highlight-box {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+/* Job modal specific styles */
+.job-modal {
+    max-width: 600px;
+}
+
+.job-accomplishments {
+    padding-left: 20px;
+}
+
+/* Business card modal specific styles */
+.business-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.business-card .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.business-card .left {
+    flex: 1;
+}
+
+.business-card .right {
+    flex: 0 0 100px;
+}
+
+#personalLogo {
+    max-width: 100%;
+    height: auto;
+}
+
+.business-card h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.business-card .jobTitle {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #666;
+}
+
+.business-card .footer {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.business-card .footer p {
+    margin: 5px 0;
+}
+
+/* Book reviews modal specific styles */
+.book-reviews-modal {
+    background: #f5f5f5;
+    padding: 30px;
+}
+
+#gr_updates_widget {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 :root {
   --bookcase-texture: url("../textures/wood2.png");
   --shelf-texture: url("../textures/wood2-h-cropped.png");
@@ -5,14 +155,6 @@
   --shelfA-z-index: 1000;
   --shelfB-z-index: 500;
   --shelfC-z-index: 100;
-}
-
-body,
-html {
-  height: 100%;
-  margin: 0;
-  background: #f7f3e9;
-  font-family: "Times New Roman", Times, serif;
 }
 
 .bookcase {

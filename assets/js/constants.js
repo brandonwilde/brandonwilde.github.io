@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
   red: [98, 55, 55],
   // lightRed: [162, 80, 74],
   // brightRed: [89, 14, 23],
@@ -15,5 +15,5 @@ const colors = {
   black: [64, 64, 64],
 };
 
-const bookHeights = [185, 191, 194, 200, 203, 205, 211, 219, 230, 250];
-const bookWidths = [25, 31, 35, 38, 42, 48, 58, 66];
+export const bookHeights = [185, 191, 194, 200, 203, 205, 211, 219, 230, 250];
+export const bookWidths = [25, 31, 35, 38, 42, 48, 58, 66];
