@@ -24,9 +24,9 @@ export class Book extends THREE.Group {
 
     createGeometry() {
         // Add slight random variations to dimensions for more realism
-        const actualWidth = this.dimensions.width * (1 + (Math.random() - 0.5) * 0.1);
-        const actualHeight = this.dimensions.height * (1 + (Math.random() - 0.5) * 0.05);
-        const actualThickness = this.dimensions.thickness * (1 + (Math.random() - 0.5) * 0.1);
+        const actualWidth = this.dimensions.width;  
+        const actualHeight = this.dimensions.height;
+        const actualThickness = this.dimensions.thickness;
 
         // Cover thickness and page inset amount
         const coverThickness = BOOK_DEFAULTS.COVER.THICKNESS;
@@ -63,19 +63,21 @@ export class Book extends THREE.Group {
             pages: new THREE.Mesh(pagesGeometry, this.materials.pages)
         };
 
-        // Position parts
-        this.parts.frontCover.position.z = actualThickness/2 - coverThickness/2;
-        this.parts.backCover.position.z = -actualThickness/2 + coverThickness/2;
-        this.parts.spine.position.z = 0;
-        this.parts.spine.position.x = -actualWidth/2 + coverThickness/2;
-        this.parts.pages.position.z = 0;
+        // Position parts - centering everything around the origin
+        this.parts.frontCover.position.set(0, 0, actualThickness/2 - coverThickness/2);
+        this.parts.backCover.position.set(0, 0, -actualThickness/2 + coverThickness/2);
+        this.parts.spine.position.set(-actualWidth/2 + coverThickness/2, 0, 0);
+        this.parts.pages.position.set(0, 0, 0);
 
-        // Add all parts to the group
+        // Create a container for all parts
+        const container = new THREE.Group();
         Object.values(this.parts).forEach(part => {
             part.castShadow = true;
             part.receiveShadow = true;
-            this.add(part);
+            container.add(part);
         });
+
+        this.add(container);
 
         // Set user data for raycasting
         this.userData.isBook = true;

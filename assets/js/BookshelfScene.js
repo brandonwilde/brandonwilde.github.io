@@ -85,21 +85,53 @@ export class BookshelfScene {
 
     createBook(id, bookProps) {
         const book = new Book(id, bookProps);
-        const shelf = this.shelves.get(bookProps.shelf);
         
-        if (shelf) {
-            shelf.addBook(book, bookProps.section);
-            this.sceneManager.add(book);
-            this.interactionManager.registerBook(id, book, document.getElementById(`${id}Modal`));
-            this.books.set(id, {
-                object: book,
-                modal: document.getElementById(`${id}Modal`),
-                shelf: bookProps.shelf,
-                section: bookProps.section
-            });
-        }
+        // Add to scene and set up interactions
+        this.sceneManager.add(book);
+        this.interactionManager.registerBook(id, book, document.getElementById(`${id}Modal`));
+        
+        // Store book data
+        this.books.set(id, {
+            object: book,
+            modal: document.getElementById(`${id}Modal`)
+        });
         
         return book;
+    }
+
+    addBooksFromConfig(bookConfigs, shelfConfigs) {
+        // Process each shelf
+        for (const [shelfId, shelfConfig] of Object.entries(shelfConfigs)) {
+            const shelf = this.shelves.get(shelfId);
+            if (!shelf) continue;
+
+            // Process each section in the shelf
+            for (const [section, bookIds] of Object.entries(shelfConfig.sections)) {
+                // Create all books for this section
+                const sectionBooks = [];
+                
+                for (const bookId of bookIds) {
+                    // Find book config
+                    let bookConfig = null;
+                    for (const category of Object.values(bookConfigs)) {
+                        if (bookId in category) {
+                            bookConfig = category[bookId];
+                            break;
+                        }
+                    }
+                    
+                    if (bookConfig) {
+                        const book = this.createBook(bookId, bookConfig);
+                        sectionBooks.push(book);
+                    }
+                }
+
+                // Add all books in this section at once
+                if (sectionBooks.length > 0) {
+                    shelf.addBookSection(sectionBooks, parseInt(section));
+                }
+            }
+        }
     }
 
     animate() {

@@ -1,5 +1,5 @@
 import { BookshelfScene } from './assets/js/BookshelfScene.js';
-import { bookConfigs, modalConfig } from './assets/js/config/contentConfig.js';
+import { bookConfigs, shelfConfigs, modalConfig } from './assets/js/config/contentConfig.js';
 
 // Initialize the scene
 const bookshelfScene = new BookshelfScene();
@@ -7,12 +7,8 @@ const bookshelfScene = new BookshelfScene();
 // Create the bookshelf structure
 bookshelfScene.createBookshelf();
 
-// Create books from configuration
-Object.values(bookConfigs).forEach(shelf => {
-    Object.values(shelf).forEach(bookConfig => {
-        bookshelfScene.createBook(bookConfig.id, bookConfig);
-    });
-});
+// Add books using the shelf configuration
+bookshelfScene.addBooksFromConfig(bookConfigs, shelfConfigs);
 
 // Initialize modals
 function initializeModals() {
