@@ -1,5 +1,5 @@
-import { BookshelfScene } from './assets/js/three-scene.js';
-import { bookConfigs, modalConfig } from './assets/js/contentConfig.js';
+import { BookshelfScene } from './assets/js/BookshelfScene.js';
+import { bookConfigs, modalConfig } from './assets/js/config/contentConfig.js';
 
 // Initialize the scene
 const bookshelfScene = new BookshelfScene();

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { BOOK_DEFAULTS } from './constants.js';
+import { BOOK_DEFAULTS } from '../config/constants.js';
 
 export class Book extends THREE.Group {
     constructor(bookId, { 
