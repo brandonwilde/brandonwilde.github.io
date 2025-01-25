@@ -13,6 +13,7 @@ export class BookshelfScene {
             this.sceneManager.camera, 
             this.sceneManager.renderer
         );
+        this.sceneManager.interactionManager = this.interactionManager;
         
         // Initialize collections
         this.shelves = new Map();
@@ -88,12 +89,20 @@ export class BookshelfScene {
         
         // Add to scene and set up interactions
         this.sceneManager.add(book);
-        this.interactionManager.registerBook(id, book, document.getElementById(`${id}Modal`));
+        
+        // Get the modal element and register it with the book
+        const modalId = `${id}Modal`;
+        const modalElement = document.getElementById(modalId);
+        if (!modalElement) {
+            console.warn(`Modal not found for book ${id}: #${modalId}`);
+        }
+        
+        this.interactionManager.registerBook(id, book, modalElement);
         
         // Store book data
         this.books.set(id, {
             object: book,
-            modal: document.getElementById(`${id}Modal`)
+            modal: modalElement
         });
         
         return book;

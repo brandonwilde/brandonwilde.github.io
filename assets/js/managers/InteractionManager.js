@@ -18,7 +18,8 @@ export class InteractionManager {
     }
 
     registerBook(id, book, modal) {
-        this.books.set(id, { object: book, modal });
+        console.log(`Registering book ${id} with modal:`, modal);
+        this.books.set(id, { object: book, modal: modal });
     }
 
     unregisterBook(id) {
@@ -26,16 +27,17 @@ export class InteractionManager {
     }
 
     onMouseMove(event) {
-        // Calculate mouse position in normalized device coordinates (-1 to +1)
-        this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        // Get canvas-relative coordinates
+        const rect = this.renderer.domElement.getBoundingClientRect();
+        this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
         // Update the picking ray with the camera and mouse position
         this.raycaster.setFromCamera(this.mouse, this.camera);
 
         // Find all intersected objects
         const intersects = this.raycaster.intersectObjects(
-            Array.from(this.books.values()).map(book => book.object), 
+            Array.from(this.books.values()).map(book => book.object),
             true
         );
 
@@ -45,34 +47,64 @@ export class InteractionManager {
 
         if (this.hoveredBook !== intersectedBook) {
             if (this.hoveredBook) {
-                this.hoveredBook.setHovered(false);
+                this.hoveredBook.object.setHovered(false);
             }
             if (intersectedBook) {
-                intersectedBook.setHovered(true);
+                intersectedBook.object.setHovered(true);
             }
             this.hoveredBook = intersectedBook;
         }
     }
 
     onClick(event) {
-        if (this.hoveredBook) {
-            const bookId = this.hoveredBook.bookId;
-            const bookData = this.books.get(bookId);
-            if (bookData && bookData.modal) {
-                bookData.modal.classList.add('modal-active');
-                this.hoveredBook.toggleOpen();
+        console.log('Click event received');
+        
+        // Get canvas-relative coordinates
+        const rect = this.renderer.domElement.getBoundingClientRect();
+        this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        // Update the picking ray with the camera and mouse position
+        this.raycaster.setFromCamera(this.mouse, this.camera);
+
+        // Find all intersected objects
+        const intersects = this.raycaster.intersectObjects(
+            Array.from(this.books.values()).map(book => book.object),
+            true
+        );
+
+        // Handle click
+        const intersectedBook = intersects.length > 0 ? 
+            this.findBookFromMesh(intersects[0].object) : null;
+
+        if (intersectedBook) {
+            if (intersectedBook.modal) {
+                // First show the modal
+                intersectedBook.modal.classList.add('modal-active');
+                
+                // Then animate the book
+                intersectedBook.object.toggleOpen();
             }
         }
     }
 
     findBookFromMesh(mesh) {
         // Find the Book instance that contains this mesh
-        for (const bookData of this.books.values()) {
-            if (bookData.object.userData.isBook && 
-                (mesh === bookData.object || mesh.parent === bookData.object)) {
-                return bookData.object;
+        for (const [bookId, bookData] of this.books.entries()) {
+            const book = bookData.object;
+            if (mesh === book || mesh.parent === book || mesh.parent?.parent === book) {
+                return bookData;
             }
         }
         return null;
+    }
+
+    isChildOfBook(mesh, book) {
+        let current = mesh;
+        while (current) {
+            if (current === book) return true;
+            current = current.parent;
+        }
+        return false;
     }
 }

@@ -35,7 +35,7 @@ export class Shelf {
     }
 
     addBookSection(books, section) {
-        console.log(`Adding ${books.length} books to section ${section}`);
+        // console.log(`Adding ${books.length} books to section ${section}`);
 
         // Define section center position
         const sectionX = {
@@ -45,22 +45,22 @@ export class Shelf {
             4: 0.75      // Rightmost quarter
         }[section] * (BOOKSHELF_DIMENSIONS.WIDTH/2);
 
-        console.log('Section center:', sectionX);
+        // console.log('Section center:', sectionX);
 
         // Calculate total width (which is actually the sum of book thicknesses since they're rotated)
         const spacing = 0.3; // Very small gap between books
         const totalWidth = books.reduce((sum, book) => sum + book.dimensions.thickness, 0) 
             + (spacing * (books.length - 1));
 
-        console.log('Books in section:', books.map(b => ({
-            id: b.bookId,
-            thickness: b.dimensions.thickness
-        })));
-        console.log('Total width with spacing:', totalWidth);
+        // console.log('Books in section:', books.map(b => ({
+        //     id: b.bookId,
+        //     thickness: b.dimensions.thickness
+        // })));
+        // console.log('Total width with spacing:', totalWidth);
 
         // Start from the leftmost position of this section
         let x = sectionX - (totalWidth / 2);
-        console.log('Starting x position:', x);
+        // console.log('Starting x position:', x);
 
         // Position each book
         books.forEach((book, index) => {
@@ -77,7 +77,7 @@ export class Shelf {
             book.position.z = 0;
             book.initialY = book.position.y;
 
-            console.log(`Book ${book.bookId}: thickness=${book.dimensions.thickness}, x=${bookX}`);
+            // console.log(`Book ${book.bookId}: thickness=${book.dimensions.thickness}, x=${bookX}`);
 
             // Move x position for next book
             x += book.dimensions.thickness + spacing;

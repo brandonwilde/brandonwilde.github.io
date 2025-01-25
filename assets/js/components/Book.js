@@ -123,12 +123,15 @@ export class Book extends THREE.Group {
     }
 
     toggleOpen() {
+        console.log('Toggle open called, current state:', this.isOpen);
         this.isOpen = !this.isOpen;
         
         window.gsap.to([this.parts.frontCover.rotation, this.parts.pages.rotation], {
             y: this.isOpen ? this.animations.open.rotateY : 0,
             duration: this.animations.open.duration,
-            ease: this.animations.open.ease
+            ease: this.animations.open.ease,
+            onStart: () => console.log('Animation started'),
+            onComplete: () => console.log('Animation completed')
         });
     }
 

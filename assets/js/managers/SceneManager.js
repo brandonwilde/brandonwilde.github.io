@@ -10,6 +10,7 @@ export class SceneManager {
         this.setupLighting();
         this.setupControls();
         this.setupEventListeners();
+        this.interactionManager = null; // Will be set by BookshelfScene
     }
 
     setupScene() {
